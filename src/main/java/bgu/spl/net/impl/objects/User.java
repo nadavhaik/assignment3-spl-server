@@ -17,14 +17,13 @@ public class User {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     private final long id;
-    private String username;
-    private String password;
-    private List<Post> posts;
-    private final Object postsLock;
+    private final String username;
+    private final String password;
+    private final List<Post> posts;
     private long lastFetchingTime;
-    private List<User> following;
-    private List<User> followers;
-    private Map<User, Boolean> blocked;
+    private final List<User> following;
+    private final List<User> followers;
+    private final Map<User, Boolean> blocked;
     private final Object followersLock;
     private final Object followingLock;
     private final BlockingQueue<Post> unsentPostsIWasTaggedIn;
@@ -38,7 +37,6 @@ public class User {
         this.password = password;
         this.birthday = dateFormat.parse(birthday);
         this.posts = new LinkedList<>();
-        this.postsLock = new Object();
         this.lastFetchingTime = System.currentTimeMillis();
         this.following = new ArrayList<>();
         this.followers = new ArrayList<>();
@@ -52,6 +50,10 @@ public class User {
 
     public Queue<AbstractContent> getUnpushedContent() {
         return unpushedContent;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public boolean sendPM(User to, String content, String sendDateTime) {
