@@ -1,6 +1,4 @@
-package bgu.spl.net.srv;
-
-import bgu.spl.net.impl.objects.User;
+package bgu.spl.net.impl.objects;
 
 import java.text.ParseException;
 import java.util.Map;

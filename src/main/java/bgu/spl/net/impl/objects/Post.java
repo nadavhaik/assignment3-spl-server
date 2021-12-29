@@ -1,7 +1,5 @@
 package bgu.spl.net.impl.objects;
 
-import bgu.spl.net.srv.ServerData;
-
 import java.util.ArrayList;
 import java.util.List;
 
