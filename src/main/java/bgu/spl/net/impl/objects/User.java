@@ -137,7 +137,12 @@ public class User {
     }
 
     public void tagInPost(Post post) {
-        unsentPostsIWasTaggedIn.add(post);
+        while(true) {
+            try {
+                unsentPostsIWasTaggedIn.put(post);
+                break;
+            } catch (InterruptedException ignored) {}
+        }
     }
 
     public boolean follow(User other) {
