@@ -1,29 +1,30 @@
 package bgu.spl.net.impl.objects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Post extends AbstractContent {
     private User author;
     private final String content;
-    private final List<User> sentTo;
+    private final HashMap<User, Boolean> sentTo;
     public Post(String content, User author) {
         super();
         this.content = content;
-        this.sentTo = new ArrayList<>();
+        this.sentTo = new HashMap<>();
         this.author = author;
         tagUsers();
     }
 
     public void markAsSentTo(User user) {
         synchronized (sentTo) {
-            sentTo.add(user);
+            sentTo.put(user, true);
         }
     }
 
     public boolean wasSentTo(User user) {
         synchronized (sentTo) {
-            return sentTo.contains(user);
+            return sentTo.get(user) != null;
         }
     }
 
