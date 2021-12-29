@@ -40,6 +40,7 @@ public class Post extends AbstractContent {
         for(start = content.indexOf('@'), end = content.indexOf(' ', start);
             start != -1 && end != -1;
             start = content.indexOf('@', end), end = content.indexOf(' ', start)) {
+
             potentialUsernames.add(content.substring(start, end));
         }
         if(start != -1) // content ends with a tag, something like: "blah blah blah...@<username>"
