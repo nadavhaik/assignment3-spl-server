@@ -39,7 +39,7 @@ public class User {
         this.birthday = dateFormat.parse(birthday);
         this.posts = new LinkedList<>();
         this.postsLock = new Object();
-        this.lastFetchingTime = 0L; // 01-01-1970 00:00Z in unix time
+        this.lastFetchingTime = System.currentTimeMillis();
         this.following = new ArrayList<>();
         this.followers = new ArrayList<>();
         this.blocked = new HashMap<>();
