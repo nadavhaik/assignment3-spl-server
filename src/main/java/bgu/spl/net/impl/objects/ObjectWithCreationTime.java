@@ -7,7 +7,7 @@ public abstract class ObjectWithCreationTime {
         this.creationTime = System.currentTimeMillis();
     }
 
-    public long getCreationTime() {
+    public Long getCreationTime() {
         return creationTime;
     }
 }

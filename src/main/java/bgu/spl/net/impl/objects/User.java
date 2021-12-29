@@ -1,71 +1,181 @@
 package bgu.spl.net.impl.objects;
 
-import javafx.collections.transformation.SortedList;
+import com.sun.jmx.remote.internal.ArrayQueue;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class User {
+    private static long nextId = 0;
+    private static synchronized long allocateNewId() {
+        return nextId++;
+    }
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
     private final long id;
     private String username;
     private String password;
     private List<Post> posts;
     private final Object postsLock;
-    private long lastPushingTime;
+    private long lastFetchingTime;
     private List<User> following;
     private List<User> followers;
-    private List<User> blockedFollowers;
-    private Object followersLock;
-    private Object followingLock;
+    private Map<User, Boolean> blocked;
+    private final Object followersLock;
+    private final Object followingLock;
+    private final BlockingQueue<Post> unsentPostsIWasTaggedIn;
+    private final List<PrivateMessage> inbox;
+    private final BlockingQueue<AbstractContent> unpushedContent;
+    private final Date birthday;
 
-
-
-    public User(String username, String password) {
-        this.id = 1; // TODO: Change
+    public User(String username, String password, String birthday) throws ParseException {
+        this.id = allocateNewId();
         this.username = username;
         this.password = password;
+        this.birthday = dateFormat.parse(birthday);
         this.posts = new LinkedList<>();
         this.postsLock = new Object();
-        this.lastPushingTime = System.currentTimeMillis();
+        this.lastFetchingTime = 0L; // 01-01-1970 00:00Z in unix time
         this.following = new ArrayList<>();
         this.followers = new ArrayList<>();
-        this.blockedFollowers = new ArrayList<>();
+        this.blocked = new HashMap<>();
         this.followersLock = new Object();
         this.followingLock = new Object();
+        this.unsentPostsIWasTaggedIn = new LinkedBlockingQueue<>();
+        this.inbox = new ArrayList<>();
+        this.unpushedContent = new LinkedBlockingQueue<>();
     }
 
+    public BlockingQueue<AbstractContent> getUnpushedContent() {
+        return unpushedContent;
+    }
 
-    public List<Post> fetchPosts(long lastFetchingTime) {
+    public boolean sendPM(User to, String content, String sendDateTime) {
+        if(this.hasBlocked(to) || to.hasBlocked(this))
+            return false;
+        to.addToInbox(new PrivateMessage(content, this, to, sendDateTime));
+        return true;
+    }
+
+    private void addToInbox(PrivateMessage privateMessage) {
+        synchronized (inbox) {
+            inbox.add(0, privateMessage);
+        }
+    }
+
+    public synchronized void fetchNewContent() {
+        List<AbstractContent> newContent = new ArrayList<>();
+        long methodStartTime = System.currentTimeMillis();
+
+        for(User followingUser : following) {
+            List<Post> unsentPosts = followingUser.fetchPosts(lastFetchingTime, methodStartTime);
+            for(Post unsentPublicPost : unsentPosts) {
+                if(!unsentPublicPost.wasSentTo(this)) {
+                    newContent.add(unsentPublicPost);
+                    unsentPublicPost.markAsSentTo(this);
+                }
+            }
+
+            List<PrivateMessage> unsentMessages = followingUser.fetchPrivateMessages(lastFetchingTime, methodStartTime);
+            newContent.addAll(unsentMessages);
+        }
+
+        while (!unsentPostsIWasTaggedIn.isEmpty()) {
+            Post post = unsentPostsIWasTaggedIn.poll();
+            if(!post.wasSentTo(this) && !this.hasBlocked(post.getAuthor()) && !post.getAuthor().hasBlocked(this) &&
+                lastFetchingTime <= post.getCreationTime() && post.getCreationTime() < methodStartTime) {
+                newContent.add(post);
+                post.markAsSentTo(this);
+            }
+        }
+
+        newContent.sort(Comparator.comparing(AbstractContent::getCreationTime));
+        unpushedContent.addAll(newContent);
+        lastFetchingTime = methodStartTime;
+    }
+
+    public List<Post> fetchPosts(long fromTime, long toTime) {
         List<Post> relevantPosts = new LinkedList<>();
         for (Post post : posts) {
-            if (post.getCreationTime() < lastFetchingTime)
+            if (fromTime <= post.getCreationTime())
                 break;
-            relevantPosts.add(post);
+            if(post.getCreationTime() < toTime)
+                relevantPosts.add(post);
         }
 
         return relevantPosts;
     }
 
-    public void addPost(String content) {
-        posts.add(0, new Post(content));
+    public List<PrivateMessage> fetchPrivateMessages(long fromTime, long toTime) {
+        List<PrivateMessage> relevantMessages = new LinkedList<>();
+        for (PrivateMessage pm : inbox) {
+            if (fromTime <= pm.getCreationTime())
+                break;
+            if(pm.getCreationTime() < toTime)
+                relevantMessages.add(pm);
+        }
+
+        return relevantMessages;
     }
 
-    public void addFollower(User user){
-        synchronized (followersLock) {
-            followers.add(user);
+    public void post(String content) {
+        posts.add(0, new Post(content, this));
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void tagInPost(Post post) {
+        unsentPostsIWasTaggedIn.add(post);
+    }
+
+    public boolean follow(User other) {
+        if(this.following.contains(other))
+            return false;
+
+        synchronized (this.followingLock) {
+            if(!(this.hasBlocked(other) || other.hasBlocked(this)))
+                this.following.add(other);
+            else
+                return false;
+        }
+
+        synchronized (other.followersLock) {
+            if(!(this.hasBlocked(other) || other.hasBlocked(this)))
+                other.followers.add(this);
+            else
+                return false;
+        }
+
+        return true;
+    }
+
+    public void unfollow(User other) {
+        synchronized (this.followingLock) {
+            this.following.remove(other);
+        }
+        synchronized (other.followersLock) {
+            other.followers.remove(this);
         }
     }
 
-    public void addToFollowing(User user){
-        synchronized (followingLock) {
-            following.add(user);
-        }
+    public void block(User other) {
+        blocked.put(other, true);
+        this.unfollow(other);
+        other.unfollow(this);
     }
 
-    public void addToBlockedFollowers(User user){
-        blockedFollowers.add(user);
+    public boolean hasBlocked(User other) {
+        return blocked.get(other) != null;
     }
 
 

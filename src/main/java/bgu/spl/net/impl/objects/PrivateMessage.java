@@ -1,7 +1,7 @@
 package bgu.spl.net.impl.objects;
 import java.time.OffsetDateTime;
 
-public class PrivateMessage extends ObjectWithCreationTime {
+public class PrivateMessage extends AbstractContent {
     private String content;
     private User sender;
     private User receiver;
