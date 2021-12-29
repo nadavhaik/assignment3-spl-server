@@ -145,7 +145,7 @@ public class User {
             return false;
 
         synchronized (this.followingLock) {
-            if(!(this.hasBlocked(other) || other.hasBlocked(this)))
+            if(!(this.hasBlocked(other) || other.hasBlocked(this))) // It's weird to check it every time - but we want to avoid bugs made due simultaneous follow/unfollow
                 this.following.add(other);
             else
                 return false;
