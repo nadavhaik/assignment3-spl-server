@@ -29,7 +29,7 @@ public class User {
     private final Object followingLock;
     private final BlockingQueue<Post> unsentPostsIWasTaggedIn;
     private final List<PrivateMessage> inbox;
-    private final BlockingQueue<AbstractContent> unpushedContent;
+    private final Queue<AbstractContent> unpushedContent;
     private final Date birthday;
 
     public User(String username, String password, String birthday) throws ParseException {
@@ -47,10 +47,10 @@ public class User {
         this.followingLock = new Object();
         this.unsentPostsIWasTaggedIn = new LinkedBlockingQueue<>();
         this.inbox = new ArrayList<>();
-        this.unpushedContent = new LinkedBlockingQueue<>();
+        this.unpushedContent = new ConcurrentLinkedQueue<>();
     }
 
-    public BlockingQueue<AbstractContent> getUnpushedContent() {
+    public Queue<AbstractContent> getUnpushedContent() {
         return unpushedContent;
     }
 
