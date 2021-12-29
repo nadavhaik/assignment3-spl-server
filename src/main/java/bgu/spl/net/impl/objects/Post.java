@@ -23,9 +23,7 @@ public class Post extends AbstractContent {
     }
 
     public boolean wasSentTo(User user) {
-        synchronized (sentTo) {
-            return sentTo.get(user) != null;
-        }
+        return sentTo.get(user) != null;
     }
 
     public String getContent() {
