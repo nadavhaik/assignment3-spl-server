@@ -79,10 +79,10 @@ public class User {
                     unsentPublicPost.markAsSentTo(this);
                 }
             }
-
-            List<PrivateMessage> unsentMessages = followingUser.fetchPrivateMessages(lastFetchingTime, methodStartTime);
-            newContent.addAll(unsentMessages);
         }
+
+        List<PrivateMessage> unsentMessages = this.fetchPrivateMessages(lastFetchingTime, methodStartTime);
+        newContent.addAll(unsentMessages);
 
         while (!unsentPostsIWasTaggedIn.isEmpty()) {
             Post post = unsentPostsIWasTaggedIn.poll();
