@@ -6,3 +6,4 @@
 .idea/compiler.xml
 .idea/encodings.xml
 .idea/uiDesigner.xml
+*.class

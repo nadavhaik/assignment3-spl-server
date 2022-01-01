@@ -1,9 +1,5 @@
 package bgu.spl.net.impl.objects;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -14,7 +10,6 @@ public class User {
     private static synchronized long allocateNewId() {
         return nextId++;
     }
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     private final long id;
     private final String username;
@@ -30,12 +25,13 @@ public class User {
     private final List<PrivateMessage> inbox;
     private final Queue<AbstractContent> unpushedContent;
     private final Date birthday;
+    private boolean loggedIn;
 
-    public User(String username, String password, String birthday) throws ParseException {
+    public User(String username, String password, Date birthday) {
         this.id = allocateNewId();
         this.username = username;
         this.password = password;
-        this.birthday = dateFormat.parse(birthday);
+        this.birthday = birthday;
         this.posts = new LinkedList<>();
         this.lastFetchingTime = System.currentTimeMillis();
         this.following = new ArrayList<>();
@@ -46,6 +42,7 @@ public class User {
         this.unsentPostsIWasTaggedIn = new LinkedBlockingQueue<>();
         this.inbox = new ArrayList<>();
         this.unpushedContent = new ConcurrentLinkedQueue<>();
+        this.loggedIn = false;
     }
 
     public Queue<AbstractContent> getUnpushedContent() {
@@ -54,6 +51,20 @@ public class User {
 
     public long getId() {
         return id;
+    }
+
+    public void login(){
+        //TODO: Create the thread....
+        loggedIn = true;
+    }
+
+    public void logout() {
+        loggedIn = false;
+    }
+
+
+    public boolean isLoggedIn() {
+        return loggedIn;
     }
 
     public boolean sendPM(User to, String content, String sendDateTime) {

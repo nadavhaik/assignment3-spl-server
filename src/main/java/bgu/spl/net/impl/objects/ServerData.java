@@ -1,6 +1,7 @@
 package bgu.spl.net.impl.objects;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,14 +19,10 @@ public class ServerData {
         return instance;
     }
 
-    public synchronized boolean register(String username, String password, String birthday) {
+    public synchronized boolean register(String username, String password, Date birthday) {
         if(users.get(username) != null)
             return false;
-        try {
-            users.put(username, new User(username, password, birthday));
-        } catch (ParseException e) {
-            return false;
-        }
+        users.put(username, new User(username, password, birthday));
 
         return true;
     }
