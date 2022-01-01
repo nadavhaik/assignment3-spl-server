@@ -103,7 +103,7 @@ public class User {
     public List<Post> fetchPosts(long fromTime, long toTime) {
         List<Post> relevantPosts = new LinkedList<>();
         for (Post post : posts) {
-            if (fromTime <= post.getCreationTime())
+            if (fromTime < post.getCreationTime())
                 break;
             if(post.getCreationTime() < toTime)
                 relevantPosts.add(post);
@@ -115,7 +115,7 @@ public class User {
     public List<PrivateMessage> fetchPrivateMessages(long fromTime, long toTime) {
         List<PrivateMessage> relevantMessages = new LinkedList<>();
         for (PrivateMessage pm : inbox) {
-            if (fromTime <= pm.getCreationTime())
+            if (fromTime < pm.getCreationTime())
                 break;
             if(pm.getCreationTime() < toTime)
                 relevantMessages.add(pm);
