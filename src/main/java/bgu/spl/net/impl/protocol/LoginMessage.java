@@ -37,14 +37,14 @@ public class LoginMessage extends ClientToServerMessage{
     @Override
     public void execute() throws ProtocolException {
         if(!captcha)
-            throw new ProtocolException("BLABLABLA");
+            throw new ProtocolException("FAILED CAPTCHA!");
         User user = ServerData.getInstance().getUser(username);
         if(user == null)
-            throw new ProtocolException("BLABLABLA");
+            throw new ProtocolException("NO SUCH USER!");
         else if(user.isLoggedIn())
-            throw new ProtocolException("BLABLABLA");
+            throw new ProtocolException("USER IS ALREADY LOGGED IN!");
         else if(!user.getPassword().equals(password))
-            throw new ProtocolException("BLABLABLA");
+            throw new ProtocolException("INVALID PASSWORD!");
 
         user.login();
 
