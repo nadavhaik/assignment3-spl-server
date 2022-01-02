@@ -2,15 +2,23 @@ package bgu.spl.net.impl.protocol;
 import bgu.spl.net.impl.objects.MessagesData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class AckMessage extends ServerToClientMessage {
     private final List<Byte> params;
-    
+
     public AckMessage(MessagesData.Type originalMessageType, List<Byte> params) {
         super(MessagesData.Type.ACK, originalMessageType);
         this.params = params;
+    }
+
+    public AckMessage(MessagesData.Type originalMessageType, byte[] params) {
+        super(MessagesData.Type.ACK, originalMessageType);
+        this.params = new ArrayList<>();
+        for(byte b : params)
+            this.params.add(b);
     }
 
     public AckMessage(MessagesData.Type originalMessageType) {
