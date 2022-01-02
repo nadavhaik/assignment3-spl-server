@@ -20,7 +20,7 @@ public abstract class ClientToServerMessage extends AbstractProtocolMessage {
     private ErrorMessage error() {
         return new ErrorMessage(this.type);
     }
-    final public ServerToClientMessage actAndRespond() {
+    final public ResponseMessage actAndRespond() {
         try {
             execute();
         } catch (ProtocolException e) {

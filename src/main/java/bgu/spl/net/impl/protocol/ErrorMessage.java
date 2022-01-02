@@ -6,7 +6,7 @@ import bgu.spl.net.impl.objects.User;
 
 import java.util.ArrayList;
 
-public class ErrorMessage extends ServerToClientMessage {
+public class ErrorMessage extends ResponseMessage {
     public ErrorMessage(MessagesData.Type originalMessageType) {
         super(originalMessageType, MessagesData.Type.ERROR);
     }
