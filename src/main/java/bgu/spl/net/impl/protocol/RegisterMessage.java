@@ -53,4 +53,9 @@ public class RegisterMessage extends ClientToServerMessage{
         if(!ServerData.getInstance().register(username, password, birthday))
             throw new ProtocolException("BLABLABLA"); // TODO: NICE MESSAGE
     }
+
+    @Override
+    protected AckMessage ack() {
+        return null;
+    }
 }

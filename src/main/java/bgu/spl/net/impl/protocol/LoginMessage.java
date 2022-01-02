@@ -52,7 +52,7 @@ public class LoginMessage extends ClientToServerMessage{
     }
 
     @Override
-    ServerToClientMessage executeAndRespond() {
+    protected AckMessage ack() {
         return null;
     }
 }

@@ -8,7 +8,7 @@ import com.sun.xml.internal.ws.api.message.Message;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogoutMessage extends MessageForUserThread{
+public class LogoutMessage extends ClientToServerMessage{
 
     public LogoutMessage(ArrayList<Byte> message, User user) throws ProtocolException{
         super(message, user);
@@ -21,6 +21,11 @@ public class LogoutMessage extends MessageForUserThread{
     @Override
     public void execute() throws ProtocolException {
         user.logout();
+    }
+
+    @Override
+    protected AckMessage ack() {
+        return null;
     }
 
 }
