@@ -1,14 +1,15 @@
 package bgu.spl.net.impl.protocol;
 
 import bgu.spl.net.impl.ProtocolException;
+import bgu.spl.net.impl.objects.MessagesData;
 import bgu.spl.net.impl.objects.User;
 
 import java.util.ArrayList;
 
 public abstract class ClientToServerMessage extends AbstractProtocolMessage {
     protected User user;
-    public ClientToServerMessage(ArrayList<Byte> message, User user) {
-        super();
+    public ClientToServerMessage(MessagesData.Type type, ArrayList<Byte> message, User user) {
+        super(type);
         this.user = user;
         decode(message);
     }

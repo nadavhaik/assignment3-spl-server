@@ -5,6 +5,9 @@ import java.util.List;
 public abstract class AbstractProtocolMessage {
     final protected static int beginIndex = 2;
     protected MessagesData.Type type;
+    public AbstractProtocolMessage(MessagesData.Type type) {
+        this.type = type;
+    }
 
     protected byte[] toArr(List<Byte> list) {
         byte[] arr = new byte[list.size()];

@@ -8,10 +8,9 @@ import java.util.ArrayList;
 
 public class ErrorMessage extends ServerToClientMessage {
     private String params;
-    public ErrorMessage(String params) {
-        super();
+    public ErrorMessage(MessagesData.Type originalMessageType, String params) {
+        super(originalMessageType, MessagesData.Type.ERROR);
         this.params = params;
-        this.type = MessagesData.Type.ERROR;
     }
 
     @Override

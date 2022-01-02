@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class AckMessage extends ServerToClientMessage {
     private String params;
-    public AckMessage(User user, String params) throws ProtocolException {
+    public AckMessage(User user, String params, MessagesData.Type originalMessageType) throws ProtocolException {
+        super(MessagesData.Type.ACK, originalMessageType);
         this.params = params;
-        this.type = MessagesData.Type.ACK;
     }
 
     @Override

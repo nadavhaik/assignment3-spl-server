@@ -11,8 +11,7 @@ import java.util.List;
 public class LogoutMessage extends ClientToServerMessage{
 
     public LogoutMessage(ArrayList<Byte> message, User user){
-        super(message, user);
-        this.type = MessagesData.Type.LOGOUT;
+        super(MessagesData.Type.LOGOUT, message, user);
     }
 
     @Override
