@@ -7,8 +7,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import C
-
 public class User {
     private static long nextId = 0;
     private static synchronized long allocateNewId() {
