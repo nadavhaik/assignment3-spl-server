@@ -1,9 +1,13 @@
 package bgu.spl.net.impl.objects;
 
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
+
+import C
 
 public class User {
     private static long nextId = 0;
@@ -198,6 +202,23 @@ public class User {
     public boolean hasBlocked(User other) {
         return blocked.get(other) != null;
     }
+
+    public int getNumberOfFollowers() {
+        return followers.size();
+    }
+    public int getNumberOfFollowing() {
+        return following.size();
+    }
+
+    public int getAge() {
+        final Date currentDate = new Date();
+        long ageInMillis = currentDate.getTime() - birthday.getTime();
+        long ageInDays = TimeUnit.DAYS.convert(ageInMillis, TimeUnit.DAYS);
+
+        return (int)ageInDays/365;
+    }
+
+
 
 
 }
