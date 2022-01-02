@@ -25,7 +25,7 @@ public class EncoderDecoder {
     public static byte[] encodeString(String s) {
         return s.getBytes(StandardCharsets.UTF_8);
     }
-    
+
     public static List<Byte> encodeStringToList(String s) {
         List<Byte> bytes = new ArrayList<>();
         byte[] arr = s.getBytes(StandardCharsets.UTF_8);
