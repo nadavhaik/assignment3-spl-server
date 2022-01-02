@@ -26,6 +26,7 @@ public class Post extends AbstractContent {
         return sentTo.get(user) != null;
     }
 
+    @Override
     public String getContent() {
         return content;
     }

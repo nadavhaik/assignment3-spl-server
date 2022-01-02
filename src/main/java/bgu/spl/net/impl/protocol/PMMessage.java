@@ -7,13 +7,13 @@ import bgu.spl.net.impl.objects.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrivateMessage extends ClientToServerMessage{
+public class PMMessage extends ClientToServerMessage{
     private String userName;
     private String content;
     private String sendingTimeAndDate;
     private User otherUser;
 
-    public PrivateMessage(ArrayList<Byte> message, User user,User otherUser) {
+    public PMMessage(ArrayList<Byte> message, User user, User otherUser) {
         super(MessagesData.Type.PRIVATE_MESSAGE, message, user);
         this.otherUser = otherUser;
     }
