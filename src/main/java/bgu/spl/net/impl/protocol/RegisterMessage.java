@@ -17,13 +17,13 @@ public class RegisterMessage extends ClientToServerMessage{
     private String password;
     private Date birthday;
 
-    public RegisterMessage(ArrayList<Byte> message) throws ProtocolException {
-        super(message);
+    public RegisterMessage(ArrayList<Byte> message) {
+        super(message, null); //
         this.type = MessagesData.Type.REGISTER;
     }
 
     @Override
-    public void decode(ArrayList<Byte> message) throws ProtocolException {
+    public void decode(ArrayList<Byte> message) {
         int lastIndex;
         List<Byte> usernameBytes = new ArrayList<>();
         for(lastIndex = beginIndex; message.get(lastIndex) != '\0'; lastIndex++) {
@@ -44,12 +44,14 @@ public class RegisterMessage extends ClientToServerMessage{
         try {
             this.birthday = dateFormat.parse(EncoderDecoder.decodeString(toArr(bdayBytes)));
         } catch (ParseException e) {
-            throw new ProtocolException("BLABLABLA"); // TODO: NICE MESSAGE
+            this.birthday = null;
         }
     }
 
     @Override
     public void execute() throws ProtocolException {
+        if(this.birthday == null)
+            throw new ProtocolException("BLABLABLA"); // TODO: NICE MESSAGE
         if(!ServerData.getInstance().register(username, password, birthday))
             throw new ProtocolException("BLABLABLA"); // TODO: NICE MESSAGE
     }

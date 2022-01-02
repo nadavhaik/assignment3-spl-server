@@ -15,7 +15,7 @@ public class LoginMessage extends ClientToServerMessage{
     private boolean captcha;
 
     public LoginMessage(ArrayList<Byte> message) throws ProtocolException {
-        super(message);
+        super(message, null); // user will be parsed from message
         this.type = MessagesData.Type.LOGIN;
     }
 

@@ -10,13 +10,13 @@ import java.util.List;
 
 public class LogoutMessage extends ClientToServerMessage{
 
-    public LogoutMessage(ArrayList<Byte> message, User user) throws ProtocolException{
+    public LogoutMessage(ArrayList<Byte> message, User user){
         super(message, user);
         this.type = MessagesData.Type.LOGOUT;
     }
 
     @Override
-    public void decode(ArrayList<Byte> message) throws ProtocolException {}
+    public void decode(ArrayList<Byte> message) {}
 
     @Override
     public void execute() throws ProtocolException {

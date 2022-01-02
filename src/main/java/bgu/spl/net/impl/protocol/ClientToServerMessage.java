@@ -6,18 +6,20 @@ import bgu.spl.net.impl.objects.User;
 import java.util.ArrayList;
 
 public abstract class ClientToServerMessage extends AbstractProtocolMessage {
-    public ClientToServerMessage(ArrayList<Byte> message) throws ProtocolException {
+    protected User user;
+    public ClientToServerMessage(ArrayList<Byte> message, User user) {
         super();
+        this.user = user;
         decode(message);
     }
 
-    public abstract void decode(ArrayList<Byte> message) throws ProtocolException;
+    public abstract void decode(ArrayList<Byte> message);
     protected abstract void execute() throws ProtocolException;
     protected abstract AckMessage ack();
     private ErrorMessage error(String errorMessage) {
         return new ErrorMessage(errorMessage);
     }
-    public ServerToClientMessage act() {
+    final public ServerToClientMessage actAndRespond() {
         try {
             execute();
         } catch (ProtocolException e) {
