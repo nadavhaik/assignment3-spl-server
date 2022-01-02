@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AckMessage extends ServerToClientMessage {
+public class AckMessage extends ResponseMessage {
     private final List<Byte> params;
 
     public AckMessage(MessagesData.Type originalMessageType, List<Byte> params) {
