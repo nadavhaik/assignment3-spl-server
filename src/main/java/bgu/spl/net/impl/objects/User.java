@@ -211,7 +211,7 @@ public class User {
     public int getAge() {
         final Date currentDate = new Date();
         long ageInMillis = currentDate.getTime() - birthday.getTime();
-        long ageInDays = TimeUnit.DAYS.convert(ageInMillis, TimeUnit.DAYS);
+        long ageInDays = TimeUnit.DAYS.convert(ageInMillis, TimeUnit.MILLISECONDS);
 
         return (int)ageInDays/365;
     }
