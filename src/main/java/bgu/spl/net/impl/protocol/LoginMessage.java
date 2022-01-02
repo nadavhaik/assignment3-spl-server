@@ -52,6 +52,6 @@ public class LoginMessage extends ClientToServerMessage{
 
     @Override
     protected AckMessage ack() {
-        return null;
+        return new AckMessage(MessagesData.Type.LOGIN);
     }
 }
