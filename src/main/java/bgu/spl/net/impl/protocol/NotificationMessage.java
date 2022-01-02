@@ -24,7 +24,7 @@ public class NotificationMessage extends ServerToClientMessage {
         byte notificationType = (post instanceof PrivateMessage) ? (byte) 0 : (byte) 1;
         List<Byte> postingUser = EncoderDecoder.encodeStringToList(post.getAuthor().getUsername());
         List<Byte> content = EncoderDecoder.encodeStringToList(post.getContent());
-        
+
         bytes.add(opCode[0]);
         bytes.add(opCode[1]);
         bytes.add(notificationType);
@@ -32,6 +32,7 @@ public class NotificationMessage extends ServerToClientMessage {
         bytes.add((byte)'\0');
         bytes.addAll(content);
         bytes.add((byte)'\0');
+        bytes.add((byte)';');
 
         return toArr(bytes);
 
