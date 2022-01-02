@@ -1,4 +1,4 @@
-package bgu.spl.net.impl;
+package bgu.spl.net.api.impl;
 
 import bgu.spl.net.api.bidi.Connections;
 import bgu.spl.net.impl.objects.User;

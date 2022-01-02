@@ -25,7 +25,7 @@ public class StatMessage extends ClientToServerMessage{
             if (message.get(lastIndex) != '|')
                 usernameBytes.add(message.get(lastIndex));
             else {
-                userNamesForStatistics.add(EncoderDecoder.decodeString(toArr(usernameBytes)));
+                userNamesForStatistics.add(BytesEncoderDecoder.decodeString(toArr(usernameBytes)));
                 usernameBytes = new ArrayList<>();
             }
         }
@@ -47,10 +47,10 @@ public class StatMessage extends ClientToServerMessage{
     protected AckMessage ack() {
         List<Byte> params = new ArrayList<>();
         for(User user : usersForStatistics) {
-            byte[] age = EncoderDecoder.encodeShort(user.getAge());
-            byte[] numOfPosts = EncoderDecoder.encodeShort(user.getNumberOfPosts());
-            byte[] numOfFollowers = EncoderDecoder.encodeShort(user.getNumberOfFollowers());
-            byte[] numOfFollowing = EncoderDecoder.encodeShort(user.getNumberOfFollowing());
+            byte[] age = BytesEncoderDecoder.encodeShort(user.getAge());
+            byte[] numOfPosts = BytesEncoderDecoder.encodeShort(user.getNumberOfPosts());
+            byte[] numOfFollowers = BytesEncoderDecoder.encodeShort(user.getNumberOfFollowers());
+            byte[] numOfFollowing = BytesEncoderDecoder.encodeShort(user.getNumberOfFollowing());
 
             params.add(age[0]);
             params.add(age[1]);

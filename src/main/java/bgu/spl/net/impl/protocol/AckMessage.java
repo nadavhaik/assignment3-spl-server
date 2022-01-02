@@ -2,7 +2,6 @@ package bgu.spl.net.impl.protocol;
 import bgu.spl.net.impl.objects.MessagesData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,11 +26,11 @@ public class AckMessage extends ResponseMessage {
     }
 
     @Override
-    byte[] encode() {
+    public byte[] encode() {
         byte[] response = new byte[4 + params.size() + 1]; // OP + MESSAGE OP + PARAMS + ';'
-        byte[] opCode = EncoderDecoder.encodeShort(MessagesData.getInstance()
+        byte[] opCode = BytesEncoderDecoder.encodeShort(MessagesData.getInstance()
                 .getOP(MessagesData.Type.ACK));
-        byte[] messageOpCode = EncoderDecoder.encodeShort(MessagesData.getInstance()
+        byte[] messageOpCode = BytesEncoderDecoder.encodeShort(MessagesData.getInstance()
                 .getOP(originalMessageType));
         response[0] = opCode[0];
         response[1] = opCode[1];

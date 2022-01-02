@@ -39,10 +39,10 @@ public class RegisterMessage extends ClientToServerMessage{
         }
 
         // TODO: CHECK IF VALIDATIONS ARE NEEDED
-        this.username = EncoderDecoder.decodeString(toArr(usernameBytes));
-        this.password = EncoderDecoder.decodeString(toArr(passwordBytes));
+        this.username = BytesEncoderDecoder.decodeString(toArr(usernameBytes));
+        this.password = BytesEncoderDecoder.decodeString(toArr(passwordBytes));
         try {
-            this.birthday = dateFormat.parse(EncoderDecoder.decodeString(toArr(bdayBytes)));
+            this.birthday = dateFormat.parse(BytesEncoderDecoder.decodeString(toArr(bdayBytes)));
         } catch (ParseException e) {
             this.birthday = null;
         }

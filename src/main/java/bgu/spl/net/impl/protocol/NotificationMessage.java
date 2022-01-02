@@ -16,14 +16,14 @@ public class NotificationMessage extends ServerToClientMessage {
     }
 
     @Override
-    byte[] encode() {
+    public byte[] encode() {
         List<Byte> bytes = new ArrayList<>();
-        byte[] opCode = EncoderDecoder.encodeShort(MessagesData.getInstance().
+        byte[] opCode = BytesEncoderDecoder.encodeShort(MessagesData.getInstance().
                 getOP(MessagesData.Type.NOTIFICATION));
 
         byte notificationType = (post instanceof PrivateMessage) ? (byte) 0 : (byte) 1;
-        List<Byte> postingUser = EncoderDecoder.encodeStringToList(post.getAuthor().getUsername());
-        List<Byte> content = EncoderDecoder.encodeStringToList(post.getContent());
+        List<Byte> postingUser = BytesEncoderDecoder.encodeStringToList(post.getAuthor().getUsername());
+        List<Byte> content = BytesEncoderDecoder.encodeStringToList(post.getContent());
 
         bytes.add(opCode[0]);
         bytes.add(opCode[1]);

@@ -6,5 +6,5 @@ public abstract class ServerToClientMessage extends AbstractProtocolMessage {
     public ServerToClientMessage(MessagesData.Type type) {
         super(type);
     }
-    abstract byte[] encode();
+    public abstract byte[] encode();
 }

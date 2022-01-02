@@ -19,7 +19,7 @@ public class PostMessage extends ClientToServerMessage {
         message.remove(0);
         message.remove(message.size()-1);
 
-        this.content = EncoderDecoder.decodeString(toArr(message));
+        this.content = BytesEncoderDecoder.decodeString(toArr(message));
     }
 
     @Override

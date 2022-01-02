@@ -7,14 +7,13 @@ import bgu.spl.net.impl.objects.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class LoginMessage extends ClientToServerMessage{
     private String username;
     private String password;
     private boolean captcha;
 
-    public LoginMessage(ArrayList<Byte> message) throws ProtocolException {
+    public LoginMessage(ArrayList<Byte> message) {
         super(MessagesData.Type.LOGIN, message, null); // user will be parsed from message
     }
 
@@ -30,8 +29,8 @@ public class LoginMessage extends ClientToServerMessage{
             passwordBytes.add(message.get(lastIndex));
         }
         this.captcha = message.get(message.size()-1) == 1;
-        this.username = EncoderDecoder.decodeString(toArr(usernameBytes));
-        this.password = EncoderDecoder.decodeString(toArr(passwordBytes));
+        this.username = BytesEncoderDecoder.decodeString(toArr(usernameBytes));
+        this.password = BytesEncoderDecoder.decodeString(toArr(passwordBytes));
     }
 
     @Override

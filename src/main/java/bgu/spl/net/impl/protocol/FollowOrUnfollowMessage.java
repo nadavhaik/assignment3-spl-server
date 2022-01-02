@@ -2,6 +2,7 @@ package bgu.spl.net.impl.protocol;
 
 import bgu.spl.net.impl.ProtocolException;
 import bgu.spl.net.impl.objects.MessagesData;
+import bgu.spl.net.impl.objects.ServerData;
 import bgu.spl.net.impl.objects.User;
 
 import java.nio.charset.StandardCharsets;
@@ -10,11 +11,9 @@ import java.util.List;
 
 public class FollowOrUnfollowMessage extends ClientToServerMessage{
     private boolean follow;
-    private String usernameToFollow;
     private User otherUser;
-    public FollowOrUnfollowMessage(ArrayList<Byte> message, User user, User otherUser){
+    public FollowOrUnfollowMessage(ArrayList<Byte> message, User user){
         super(MessagesData.Type.FOLLOW_OR_UNFOLLOW, message, user);
-        this.otherUser = otherUser;
     }
 
     @Override
@@ -25,7 +24,8 @@ public class FollowOrUnfollowMessage extends ClientToServerMessage{
         for(lastIndex++; lastIndex < message.size(); lastIndex++) {
             usernameBytes.add(message.get(lastIndex));
         }
-        this.usernameToFollow = EncoderDecoder.decodeString(toArr(usernameBytes));
+        this.otherUser = ServerData.getInstance().
+                getUser(BytesEncoderDecoder.decodeString(toArr(usernameBytes)));
     }
 
     @Override

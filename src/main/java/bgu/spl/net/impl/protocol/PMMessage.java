@@ -2,20 +2,19 @@ package bgu.spl.net.impl.protocol;
 
 import bgu.spl.net.impl.ProtocolException;
 import bgu.spl.net.impl.objects.MessagesData;
+import bgu.spl.net.impl.objects.ServerData;
 import bgu.spl.net.impl.objects.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PMMessage extends ClientToServerMessage{
-    private String userName;
     private String content;
     private String sendingTimeAndDate;
     private User otherUser;
 
-    public PMMessage(ArrayList<Byte> message, User user, User otherUser) {
+    public PMMessage(ArrayList<Byte> message, User user) {
         super(MessagesData.Type.PRIVATE_MESSAGE, message, user);
-        this.otherUser = otherUser;
     }
 
     @Override
@@ -33,9 +32,10 @@ public class PMMessage extends ClientToServerMessage{
         for(lastIndex++; message.get(lastIndex) != '\0'; lastIndex++) {
             sendingTimeAndDateBytes.add(message.get(lastIndex));
         }
-        this.userName = EncoderDecoder.decodeString(toArr(usernameBytes));
-        this.content = EncoderDecoder.decodeString(toArr(contentBytes));
-        this.sendingTimeAndDate = EncoderDecoder.decodeString(toArr(sendingTimeAndDateBytes));
+        this.otherUser = ServerData.getInstance().
+                getUser(BytesEncoderDecoder.decodeString(toArr(usernameBytes)));
+        this.content = BytesEncoderDecoder.decodeString(toArr(contentBytes));
+        this.sendingTimeAndDate = BytesEncoderDecoder.decodeString(toArr(sendingTimeAndDateBytes));
 
     }
 

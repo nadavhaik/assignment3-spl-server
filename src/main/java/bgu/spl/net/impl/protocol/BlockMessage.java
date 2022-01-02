@@ -22,7 +22,7 @@ public class BlockMessage extends ClientToServerMessage{
         for(lastIndex = beginIndex; message.get(lastIndex) != '\0'; lastIndex++) {
             usernameBytes.add(message.get(lastIndex));
         }
-        this.username = EncoderDecoder.decodeString(toArr(usernameBytes));
+        this.username = BytesEncoderDecoder.decodeString(toArr(usernameBytes));
     }
 
     @Override
