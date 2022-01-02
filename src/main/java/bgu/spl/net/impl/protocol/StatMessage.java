@@ -38,7 +38,7 @@ public class StatMessage extends ClientToServerMessage{
         for (String userName : userNamesForStatistics){
             if(ServerData.getInstance().getUser(userName) == null)
                 throw new ProtocolException("no such user register");
-
+            usersForStatistics.add(ServerData.getInstance().getUser(userName));
         }
     }
 
