@@ -18,7 +18,7 @@ public abstract class ClientToServerMessage extends AbstractProtocolMessage {
     protected abstract void execute() throws ProtocolException;
     protected abstract AckMessage ack();
     private ErrorMessage error(String errorMessage) {
-        return new ErrorMessage(errorMessage);
+        return new ErrorMessage(this.type, errorMessage);
     }
     final public ServerToClientMessage actAndRespond() {
         try {
