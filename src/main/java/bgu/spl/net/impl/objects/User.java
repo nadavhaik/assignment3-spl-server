@@ -177,13 +177,16 @@ public class User {
         return true;
     }
 
-    public void unfollow(User other) {
+    public boolean unfollow(User other) {
         synchronized (this.followingLock) {
+            if(!this.following.contains(other))
+                return false;
             this.following.remove(other);
         }
         synchronized (other.followersLock) {
             other.followers.remove(this);
         }
+        return true;
     }
 
     public void block(User other) {
