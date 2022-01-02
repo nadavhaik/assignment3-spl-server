@@ -197,8 +197,8 @@ public class User {
 
     public void block(User other) {
         blocked.put(other, true);
-        this.unfollow(other);
-        other.unfollow(this);
+//        this.unfollow(other);
+//        other.unfollow(this);
     }
 
     public boolean hasBlocked(User other) {
