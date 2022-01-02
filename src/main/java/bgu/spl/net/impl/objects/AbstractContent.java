@@ -5,4 +5,5 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
         super();
     }
     public abstract String getContent();
+    public abstract User getAuthor();
 }

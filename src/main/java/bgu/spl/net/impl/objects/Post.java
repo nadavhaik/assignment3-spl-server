@@ -16,6 +16,7 @@ public class Post extends AbstractContent {
         tagUsers();
     }
 
+
     public void markAsSentTo(User user) {
         synchronized (sentTo) {
             sentTo.put(user, true);
@@ -31,6 +32,7 @@ public class Post extends AbstractContent {
         return content;
     }
 
+    @Override
     public User getAuthor() {
         return author;
     }

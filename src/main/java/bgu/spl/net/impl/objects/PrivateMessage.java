@@ -19,4 +19,9 @@ public class PrivateMessage extends AbstractContent {
     public String getContent() {
         return content;
     }
+
+    @Override
+    public User getAuthor() {
+        return sender;
+    }
 }
