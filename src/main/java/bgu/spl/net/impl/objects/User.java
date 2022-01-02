@@ -201,19 +201,19 @@ public class User {
         return blocked.get(other) != null;
     }
 
-    public int getNumberOfFollowers() {
-        return followers.size();
+    public short getNumberOfFollowers() {
+        return (short)followers.size();
     }
-    public int getNumberOfFollowing() {
-        return following.size();
+    public short getNumberOfFollowing() {
+        return (short)following.size();
     }
 
-    public int getAge() {
+    public short getAge() {
         final Date currentDate = new Date();
         long ageInMillis = currentDate.getTime() - birthday.getTime();
         long ageInDays = TimeUnit.DAYS.convert(ageInMillis, TimeUnit.MILLISECONDS);
 
-        return (int)ageInDays/365;
+        return (short)(ageInDays/365);
     }
 
 

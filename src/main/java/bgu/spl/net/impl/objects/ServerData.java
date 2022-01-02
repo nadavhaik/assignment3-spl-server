@@ -2,6 +2,8 @@ package bgu.spl.net.impl.objects;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,6 +31,13 @@ public class ServerData {
 
     public User getUser(String username) {
         return users.get(username);
+    }
+
+    public List<User> getAllUsers() {
+        LinkedList<User> allUsers = new LinkedList<>();
+        for(Map.Entry<String, User> entry : this.users.entrySet())
+            allUsers.add(entry.getValue());
+        return allUsers;
     }
 
 }
