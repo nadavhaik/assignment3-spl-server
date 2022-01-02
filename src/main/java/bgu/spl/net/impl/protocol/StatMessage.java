@@ -37,8 +37,8 @@ public class StatMessage extends ClientToServerMessage{
             throw new ProtocolException("the user is not logged in");
         for (String userName : userNamesForStatistics){
             if(ServerData.getInstance().getUser(userName) == null)
-                throw new ProtocolException("no such user exists");
-
+                throw new ProtocolException("no such user register");
+            usersForStatistics.add(ServerData.getInstance().getUser(userName));
         }
     }
 
