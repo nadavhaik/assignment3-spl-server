@@ -1,6 +1,8 @@
 package bgu.spl.net.impl.protocol;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EncoderDecoder {
     public static short decodeShort(byte[] byteArr) {
@@ -22,5 +24,13 @@ public class EncoderDecoder {
 
     public static byte[] encodeString(String s) {
         return s.getBytes(StandardCharsets.UTF_8);
+    }
+    
+    public static List<Byte> encodeStringToList(String s) {
+        List<Byte> bytes = new ArrayList<>();
+        byte[] arr = s.getBytes(StandardCharsets.UTF_8);
+        for(byte b : arr)
+            bytes.add(b);
+        return bytes;
     }
 }
