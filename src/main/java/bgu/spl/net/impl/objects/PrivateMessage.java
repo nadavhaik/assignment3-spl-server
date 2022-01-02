@@ -14,4 +14,9 @@ public class PrivateMessage extends AbstractContent {
         this.receiver = receiver;
         this.sendTime = OffsetDateTime.parse(sendDatetime);
     }
+
+    @Override
+    public String getContent() {
+        return content;
+    }
 }

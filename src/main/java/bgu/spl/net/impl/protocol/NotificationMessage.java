@@ -1,14 +1,24 @@
 package bgu.spl.net.impl.protocol;
 
+import bgu.spl.net.impl.objects.AbstractContent;
 import bgu.spl.net.impl.objects.MessagesData;
 
-public class NotificationMessage extends ServerToClientMessage{
-    public NotificationMessage(MessagesData.Type originalMessageType) {
-        super(MessagesData.Type.NOTIFICATION, originalMessageType);
+import java.util.ArrayList;
+import java.util.List;
+
+public class NotificationMessage extends ServerToClientMessage {
+
+    private AbstractContent post;
+    public NotificationMessage(AbstractContent post) {
+        super(MessagesData.Type.NOTIFICATION);
+        this.post = post;
     }
 
     @Override
     byte[] encode() {
-        return new byte[0];
+        List<Byte> bytes = new ArrayList<>();
+        byte[] opCode = EncoderDecoder.encodeShort(MessagesData.getInstance().
+                getOP(MessagesData.Type.NOTIFICATION));
+        
     }
 }
