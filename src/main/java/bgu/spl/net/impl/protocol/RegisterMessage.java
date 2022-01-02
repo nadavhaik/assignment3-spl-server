@@ -58,6 +58,6 @@ public class RegisterMessage extends ClientToServerMessage{
 
     @Override
     protected AckMessage ack() {
-        return null;
+        return new AckMessage(MessagesData.Type.REGISTER);
     }
 }
