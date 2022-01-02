@@ -70,6 +70,10 @@ public class User {
     }
 
     public boolean sendPM(User to, String content, String sendDateTime) {
+        if(ServerData.getInstance().getUser(to.getUsername()) == null)
+            return false;
+        if(!following.contains(to))
+            return false;
         if(this.hasBlocked(to) || to.hasBlocked(this))
             return false;
         to.addToInbox(new PrivateMessage(content, this, to, sendDateTime));
