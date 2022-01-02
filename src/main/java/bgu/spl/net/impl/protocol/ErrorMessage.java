@@ -18,7 +18,6 @@ public class ErrorMessage extends ServerToClientMessage {
         byte[] messageOpCode = EncoderDecoder.encodeShort(MessagesData.getInstance()
                 .getOP(originalMessageType));
 
-
         return new byte[]{opCode[0], opCode[1], messageOpCode[0], messageOpCode[1], ';'};
     }
 
