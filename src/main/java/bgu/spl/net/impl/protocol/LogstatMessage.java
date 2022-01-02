@@ -32,9 +32,23 @@ public class LogstatMessage extends ClientToServerMessage{
 
     @Override
     protected AckMessage ack() {
-        List<Byte> arguments = new ArrayList<>();
+        List<Byte> params = new ArrayList<>();
         for(User user : loggedInUsers) {
-            byte[] age = EncoderDecoder.encodeShort(user.getAge())
+            byte[] age = EncoderDecoder.encodeShort(user.getAge());
+            byte[] numOfPosts = EncoderDecoder.encodeShort(user.getNumberOfPosts());
+            byte[] numOfFollowers = EncoderDecoder.encodeShort(user.getNumberOfFollowers());
+            byte[] numOfFollowing = EncoderDecoder.encodeShort(user.getNumberOfFollowing());
+
+            params.add(age[0]);
+            params.add(age[1]);
+            params.add(numOfPosts[0]);
+            params.add(numOfPosts[1]);
+            params.add(numOfFollowers[0]);
+            params.add(numOfFollowers[1]);
+            params.add(numOfFollowing[0]);
+            params.add(numOfFollowing[1]);
         }
+
+        return new AckMessage(MessagesData.Type.LOGGEDIN_STATES, params);
     }
 }

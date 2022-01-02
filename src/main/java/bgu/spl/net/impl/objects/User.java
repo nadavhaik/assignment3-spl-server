@@ -204,7 +204,9 @@ public class User {
     public boolean hasBlocked(User other) {
         return blocked.get(other) != null;
     }
-
+    public short getNumberOfPosts() {
+        return (short)posts.size();
+    }
     public short getNumberOfFollowers() {
         return (short)followers.size();
     }
