@@ -7,10 +7,8 @@ import bgu.spl.net.impl.objects.User;
 import java.util.ArrayList;
 
 public class ErrorMessage extends ServerToClientMessage {
-    private String params;
-    public ErrorMessage(MessagesData.Type originalMessageType, String params) {
+    public ErrorMessage(MessagesData.Type originalMessageType) {
         super(originalMessageType, MessagesData.Type.ERROR);
-        this.params = params;
     }
 
     @Override
