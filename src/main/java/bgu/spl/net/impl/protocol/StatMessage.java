@@ -6,35 +6,46 @@ import bgu.spl.net.impl.objects.ServerData;
 import bgu.spl.net.impl.objects.User;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
+public class StatMessage extends ClientToServerMessage{
+    ArrayList<String> userNamesForStatistics;
+    ArrayList<User> usersForStatistics;
 
-public class LogstatMessage extends ClientToServerMessage{
-    private List<User> loggedInUsers;
-
-    public LogstatMessage(ArrayList<Byte> message, User user) {
-        super(MessagesData.Type.LOGGEDIN_STATES, message, user);
+    public StatMessage(ArrayList<Byte> message, User user) {
+        super(MessagesData.Type.STATISTICS, message, user);
+        userNamesForStatistics = new ArrayList<>();
     }
 
     @Override
-    public void decode(ArrayList<Byte> message) {}
+    public void decode(ArrayList<Byte> message) {
+        int lastIndex = beginIndex;
+        List<Byte> usernameBytes = new ArrayList<>();
+        for(lastIndex = beginIndex; message.get(lastIndex) != '\0'; lastIndex++) {
+            if (message.get(lastIndex) != '|')
+                usernameBytes.add(message.get(lastIndex));
+            else {
+                userNamesForStatistics.add(EncoderDecoder.decodeString(toArr(usernameBytes)));
+                usernameBytes = new ArrayList<>();
+            }
+        }
+    }
 
     @Override
     protected void execute() throws ProtocolException {
         if(!user.isLoggedIn())
-            throw new ProtocolException("User isn't logged in!");
-        loggedInUsers = new LinkedList<>();
-        for(User user : ServerData.getInstance().getAllUsers()) {
-            if(user.isLoggedIn())
-                loggedInUsers.add(user);
+            throw new ProtocolException("the user is not logged in");
+        for (String userName : userNamesForStatistics){
+            if(ServerData.getInstance().getUser(userName) == null)
+                throw new ProtocolException("no such user exists");
+
         }
     }
 
     @Override
     protected AckMessage ack() {
         List<Byte> params = new ArrayList<>();
-        for(User user : loggedInUsers) {
+        for(User user : usersForStatistics) {
             byte[] age = EncoderDecoder.encodeShort(user.getAge());
             byte[] numOfPosts = EncoderDecoder.encodeShort(user.getNumberOfPosts());
             byte[] numOfFollowers = EncoderDecoder.encodeShort(user.getNumberOfFollowers());

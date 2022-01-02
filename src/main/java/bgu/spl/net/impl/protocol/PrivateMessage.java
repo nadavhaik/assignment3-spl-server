@@ -48,7 +48,7 @@ public class PrivateMessage extends ClientToServerMessage{
     }
 
     @Override
-    protected AckMessage ack() {
+    protected AckMessage ack() { // no ack for this method ?
         return null;
     }
 }
