@@ -58,7 +58,7 @@ public class MessagesData {
         }};
     }
 
-    public MessagesData getInstance() {
+    public static MessagesData getInstance() {
         if(instance == null)
             instance = new MessagesData();
         return instance;

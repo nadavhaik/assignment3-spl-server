@@ -15,7 +15,7 @@ public class AckMessage extends ServerToClientMessage {
 
     @Override
     byte[] encode() {
-        return new byte[0];
+        throw new UnsupportedOperationException();
     }
 
 }

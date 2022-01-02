@@ -9,7 +9,7 @@ public class EncoderDecoder {
         return result;
     }
 
-    public byte[] encodeShort(short num) {
+    public static byte[] encodeShort(short num) {
         byte[] bytesArr = new byte[2];
         bytesArr[0] = (byte)((num >> 8) & 0xFF);
         bytesArr[1] = (byte)(num & 0xFF);

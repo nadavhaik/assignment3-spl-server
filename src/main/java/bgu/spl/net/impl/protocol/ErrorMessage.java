@@ -13,7 +13,13 @@ public class ErrorMessage extends ServerToClientMessage {
 
     @Override
     byte[] encode() {
-        return new byte[0];
+        byte[] opCode = EncoderDecoder.encodeShort(MessagesData.getInstance()
+                .getOP(MessagesData.Type.ERROR));
+        byte[] messageOpCode = EncoderDecoder.encodeShort(MessagesData.getInstance()
+                .getOP(originalMessageType));
+
+
+        return new byte[]{opCode[0], opCode[1], messageOpCode[0], messageOpCode[1]};
     }
 
 }
