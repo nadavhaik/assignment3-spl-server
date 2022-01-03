@@ -51,9 +51,9 @@ public class RegisterMessage extends ClientToServerMessage{
     @Override
     public void execute() throws ProtocolException {
         if(this.birthday == null)
-            throw new ProtocolException("BLABLABLA"); // TODO: NICE MESSAGE
+            throw new ProtocolException("Could not parse birthday");
         if(!ServerData.getInstance().register(username, password, birthday))
-            throw new ProtocolException("BLABLABLA"); // TODO: NICE MESSAGE
+            throw new ProtocolException("Registration failed");
     }
 
     @Override
