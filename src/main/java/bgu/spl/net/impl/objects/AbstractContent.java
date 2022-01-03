@@ -2,6 +2,7 @@ package bgu.spl.net.impl.objects;
 
 public abstract class AbstractContent extends ObjectWithCreationTime {
     private final static String[] filteredWords = {
+            // Hard coded - no null or empty strings allowed here!
             "ILLUMINATI",
             "LIZARD PEOPLE",
             "FLAT EARTH",
