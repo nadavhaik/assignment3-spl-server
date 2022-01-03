@@ -1,7 +1,5 @@
 package bgu.spl.net.impl.objects;
 
-import java.util.regex.Pattern;
-
 public abstract class AbstractContent extends ObjectWithCreationTime {
     private final static String[] filteredWords = {
             "ILLUMINATI",
