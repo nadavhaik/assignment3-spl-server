@@ -3,6 +3,7 @@ package bgu.spl.net.impl.objects;
 public abstract class AbstractContent extends ObjectWithCreationTime {
     private final static String[] offensiveWords = {
             // Hard coded - no null or empty strings allowed here!
+            // Also, the reserved word '<filtered>' is not allowed.
             "Trump",
             "war",
             "אילומינטי",
