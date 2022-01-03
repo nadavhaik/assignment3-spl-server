@@ -3,14 +3,12 @@ package bgu.spl.net.impl.objects;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Post extends AbstractContent {
-    private User author;
-    private final String content;
     private final HashMap<User, Boolean> sentTo;
     public Post(String content, User author) {
-        super();
-        this.content = content;
+        super(author, content, false);
         this.sentTo = new HashMap<>();
         this.author = author;
         tagUsers();
@@ -25,16 +23,6 @@ public class Post extends AbstractContent {
 
     public boolean wasSentTo(User user) {
         return sentTo.get(user) != null;
-    }
-
-    @Override
-    public String getContent() {
-        return content;
-    }
-
-    @Override
-    public User getAuthor() {
-        return author;
     }
 
     public void tagUsers() {

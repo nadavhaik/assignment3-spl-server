@@ -2,26 +2,13 @@ package bgu.spl.net.impl.objects;
 import java.time.OffsetDateTime;
 
 public class PrivateMessage extends AbstractContent {
-    private String content;
-    private User sender;
     private User receiver;
     private OffsetDateTime sendTime;
 
     public PrivateMessage(String content, User sender, User receiver, String sendDatetime) {
-        super();
+        super(sender, content, true);
         this.content = content;
-        this.sender = sender;
         this.receiver = receiver;
         this.sendTime = OffsetDateTime.parse(sendDatetime);
-    }
-
-    @Override
-    public String getContent() {
-        return content;
-    }
-
-    @Override
-    public User getAuthor() {
-        return sender;
     }
 }
