@@ -8,7 +8,7 @@ import bgu.spl.net.impl.protocol.ClientToServerMessage;
 public class MessagingProtocolImpl implements MessagingProtocol<AbstractProtocolMessage> {
     private boolean shouldTerminate;
 
-    public MessagingProtocolImpl(User user) {
+    public MessagingProtocolImpl() {
         shouldTerminate = false;
     }
     public void terminate() {
