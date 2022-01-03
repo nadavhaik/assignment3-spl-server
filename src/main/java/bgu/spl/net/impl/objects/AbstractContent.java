@@ -32,7 +32,7 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
         for(String word : offensiveWords) {
             // Edge case -  Word equals whole content
             if(sb.toString().equals(word)) {
-                sb = new StringBuilder(word);
+                sb = new StringBuilder(replacementWord);
                 continue;
             }
 
