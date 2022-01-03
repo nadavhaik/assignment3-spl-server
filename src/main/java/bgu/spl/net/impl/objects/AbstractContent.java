@@ -26,7 +26,7 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
     private String filter(String content) {
         StringBuilder sb = new StringBuilder(content);
         for(String word : filteredWords) {
-            // Edge cases -  Word equals whole content
+            // Edge case -  Word equals whole content
             if(sb.toString().equals(word)) {
                 sb = new StringBuilder(word);
                 continue;
