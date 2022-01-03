@@ -23,7 +23,7 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
             this.content = content;
     }
 
-    public String filter(String content) {
+    private String filter(String content) {
         StringBuilder sb = new StringBuilder(content);
         for(String word : filteredWords) {
             // Edge cases -  Word equals whole content
