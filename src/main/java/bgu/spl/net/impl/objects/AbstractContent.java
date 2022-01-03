@@ -41,7 +41,7 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
             }
             // 3. Word is the postfix
             if(sb.toString().endsWith(" " + word))
-                sb.replace(sb.length()-1-word.length(), sb.length()-1, replacementWord);
+                sb.replace(sb.length()-word.length(), sb.length()-1, replacementWord);
         }
         return sb.toString();
     }
