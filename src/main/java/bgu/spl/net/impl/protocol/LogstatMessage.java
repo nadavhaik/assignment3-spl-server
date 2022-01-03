@@ -22,8 +22,8 @@ public class LogstatMessage extends ClientToServerMessage{
 
     @Override
     protected void execute() throws ProtocolException {
-        if(!user.isLoggedIn())
-            throw new ProtocolException("User isn't logged in!");
+        if(user == null)
+            throw new ProtocolException("User is not logged in");
         loggedInUsers = new LinkedList<>();
         for(User user : ServerData.getInstance().getAllUsers()) {
             if(user.isLoggedIn())

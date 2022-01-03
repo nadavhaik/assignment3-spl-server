@@ -49,8 +49,8 @@ public class PMMessage extends ClientToServerMessage{
 
     @Override
     protected void execute() throws ProtocolException {
-        if(!user.isLoggedIn())
-            throw new ProtocolException("THE SENDER USER IS NOT LOGGEDIN");
+        if(user == null)
+            throw new ProtocolException("User is not logged in");
         if(sendingTimeAndDate == null)
             throw new ProtocolException("ERROR PARSING SENDING TIME");
         if(!user.sendPM(otherUser,content,sendingTimeAndDate))

@@ -33,6 +33,13 @@ public class LoginMessage extends ClientToServerMessage{
         this.password = BytesEncoderDecoder.decodeString(toArr(passwordBytes));
     }
 
+    public User getUser() {
+        User user = ServerData.getInstance().getUser(username);
+        if(user == null || user.isLoggedIn() || !user.getPassword().equals(password))
+            return null;
+        return user;
+    }
+
     @Override
     public void execute() throws ProtocolException {
         if(!captcha)

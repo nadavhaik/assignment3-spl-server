@@ -23,6 +23,8 @@ public class PostMessage extends ClientToServerMessage {
 
     @Override
     protected void execute() throws ProtocolException {
+        if(user == null)
+            throw new ProtocolException("User is not logged in");
         user.post(content);
     }
 

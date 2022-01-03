@@ -2,6 +2,7 @@ package bgu.spl.net.api.impl;
 
 import bgu.spl.net.api.MessageEncoderDecoder;
 import bgu.spl.net.impl.objects.MessagesData;
+import bgu.spl.net.impl.objects.ServerData;
 import bgu.spl.net.impl.objects.User;
 import bgu.spl.net.impl.protocol.*;
 
@@ -10,11 +11,7 @@ import java.util.List;
 
 public class EncoderDecoderImpl implements MessageEncoderDecoder<AbstractProtocolMessage> {
     private ArrayList<Byte> messageBytes;
-    private final User user;
-    public EncoderDecoderImpl(User user) {
-        this.messageBytes = new ArrayList<>();
-        this.user = user;
-    }
+    private User user;
 
     public EncoderDecoderImpl() {
         this.messageBytes = new ArrayList<>();
@@ -39,9 +36,11 @@ public class EncoderDecoderImpl implements MessageEncoderDecoder<AbstractProtoco
                 break;
             case LOGIN:
                 message = new LoginMessage(messageBytes);
+                this.user = ((LoginMessage)message).getUser();
                 break;
             case LOGOUT:
                 message = new LogoutMessage(messageBytes, user);
+                user = null;
                 break;
             case FOLLOW_OR_UNFOLLOW:
                 message = new FollowOrUnfollowMessage(messageBytes, user);

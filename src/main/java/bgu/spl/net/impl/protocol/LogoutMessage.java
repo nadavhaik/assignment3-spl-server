@@ -18,6 +18,8 @@ public class LogoutMessage extends ClientToServerMessage{
 
     @Override
     public void execute() throws ProtocolException {
+        if(user == null)
+            throw new ProtocolException("User is not logged in");
         user.logout();
     }
 

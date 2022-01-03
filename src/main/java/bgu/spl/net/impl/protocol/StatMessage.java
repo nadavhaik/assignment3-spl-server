@@ -33,8 +33,8 @@ public class StatMessage extends ClientToServerMessage{
 
     @Override
     protected void execute() throws ProtocolException {
-        if(!user.isLoggedIn())
-            throw new ProtocolException("the user is not logged in");
+        if(user == null)
+            throw new ProtocolException("User is not logged in");
         for (String userName : userNamesForStatistics){
             User otherUser = ServerData.getInstance().getUser(userName);
             if(otherUser == null)

@@ -2,14 +2,13 @@ package bgu.spl.net.api.impl;
 
 import bgu.spl.net.api.MessagingProtocol;
 import bgu.spl.net.impl.objects.User;
-import bgu.spl.net.impl.protocol.AbstractProtocolMessage;
-import bgu.spl.net.impl.protocol.ClientToServerMessage;
-import bgu.spl.net.impl.protocol.LogoutMessage;
+import bgu.spl.net.impl.protocol.*;
 
 public class MessagingProtocolImpl implements MessagingProtocol<AbstractProtocolMessage> {
     private boolean shouldTerminate;
-
+    private User user;
     public MessagingProtocolImpl() {
+        this.user = null;
         shouldTerminate = false;
     }
     @Override
@@ -17,9 +16,14 @@ public class MessagingProtocolImpl implements MessagingProtocol<AbstractProtocol
         if(!(msg instanceof ClientToServerMessage))
             throw new UnsupportedOperationException();
         ClientToServerMessage m = (ClientToServerMessage) msg;
-        if(m instanceof LogoutMessage)
+        ResponseMessage response = m.actAndRespond();
+        if(m instanceof LogoutMessage || m instanceof RegisterMessage ||
+                (m instanceof LoginMessage && response instanceof ErrorMessage))
             shouldTerminate = true;
-        return m.actAndRespond();
+        else if (m instanceof LoginMessage) {
+
+        }
+        return response;
     }
 
     @Override
