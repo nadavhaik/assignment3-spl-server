@@ -7,7 +7,9 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
             "LIZARD PEOPLE",
             "FLAT EARTH",
             "KAHANA WAS RIGHT",
-            "COVFEFE"
+            "COVFEFE",
+            "Trump",
+            "war"
     };
     private final static String replacementWord = "<filtered>";
 
