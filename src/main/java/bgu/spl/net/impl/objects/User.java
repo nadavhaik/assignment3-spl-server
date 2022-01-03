@@ -6,11 +6,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class User {
-    private static long nextId = 0;
-    private static synchronized long allocateNewId() {
-        return nextId++;
+    private static AtomicLong nextId = new AtomicLong(0);
+    private static long allocateNewId() {
+        return nextId.getAndIncrement();
     }
 
     private final long id;
