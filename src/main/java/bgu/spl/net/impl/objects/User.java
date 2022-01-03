@@ -69,7 +69,7 @@ public class User {
         return loggedIn;
     }
 
-    public boolean sendPM(User to, String content, String sendDateTime) {
+    public boolean sendPM(User to, String content, Date sendDateTime) {
         if(ServerData.getInstance().getUser(to.getUsername()) == null)
             return false;
         if(!following.contains(to))
