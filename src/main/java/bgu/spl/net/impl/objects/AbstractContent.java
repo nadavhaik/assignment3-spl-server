@@ -42,7 +42,7 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
             // 2. Word has occurrences inside
             for(int start = sb.indexOf(" " + word + " "); start != -1;
                     start = sb.indexOf(" " + word + " ")) {
-                int end = start + 1 + (word.length()-1) + 1 ; // including both spaces
+                int end = start + 1 + (word.length()-1) + 1; // including both spaces
                 sb.replace(start+1, end-1, replacementWord);
             }
             // 3. Word is the postfix
