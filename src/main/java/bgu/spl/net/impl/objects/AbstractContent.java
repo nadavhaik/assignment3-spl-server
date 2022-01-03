@@ -1,16 +1,17 @@
 package bgu.spl.net.impl.objects;
 
 public abstract class AbstractContent extends ObjectWithCreationTime {
-    private final static String[] filteredWords = {
+    private final static String[] offensiveWords = {
             // Hard coded - no null or empty strings allowed here!
-            "ILLUMINATI",
-            "LIZARD PEOPLE",
-            "FLAT EARTH",
-            "KAHANA WAS RIGHT",
-            "COVFEFE",
             "Trump",
             "war",
-            "התקווה 6 דווקא סבבה"
+            "אילומינטי",
+            "אנשי לטאה",
+            "כדור הארץ שטוח",
+            "כהנא צדק",
+            "covfefe",
+            "התקווה 6 דווקא סבבה",
+            "הבוחן באלגו לא היה כזה קשה"
     };
     private final static String replacementWord = "<filtered>";
 
@@ -27,7 +28,7 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
 
     private String filter(String content) {
         StringBuilder sb = new StringBuilder(content);
-        for(String word : filteredWords) {
+        for(String word : offensiveWords) {
             // Edge case -  Word equals whole content
             if(sb.toString().equals(word)) {
                 sb = new StringBuilder(word);
