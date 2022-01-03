@@ -17,7 +17,6 @@ public class PostMessage extends ClientToServerMessage {
         // removing the op-code bytes and the terminating byte:
         message.remove(0);
         message.remove(0);
-        message.remove(message.size()-1);
 
         this.content = BytesEncoderDecoder.decodeString(toArr(message));
     }
