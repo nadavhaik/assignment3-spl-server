@@ -1,19 +1,19 @@
 package bgu.spl.net.api.impl;
 
 import bgu.spl.net.api.bidi.Connections;
-import bgu.spl.net.impl.objects.User;
 import bgu.spl.net.srv.ConnectionHandler;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ConnectionsImpl<T> implements Connections<T> {
-    private HashMap<User, ConnectionHandler> connectionHandlerList;
+    private final HashMap<Integer, ConnectionHandler<T>> connections;
+    public ConnectionsImpl() {
+        connections = new HashMap<>();
+    }
 
     @Override
     public boolean send(int connectionId, T msg) {
-        // TODO: IMPLEMENT
-        return false;
+        connections.get(connectionId).send(msg);
     }
 
     @Override
