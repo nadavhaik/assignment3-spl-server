@@ -9,7 +9,8 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
             "KAHANA WAS RIGHT",
             "COVFEFE",
             "Trump",
-            "war"
+            "war",
+            "התקווה 6 דווקא סבבה"
     };
     private final static String replacementWord = "<filtered>";
 
