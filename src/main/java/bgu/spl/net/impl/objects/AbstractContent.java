@@ -47,9 +47,11 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
         }
         return sb.toString();
     }
+
     public String getContent() {
         return content;
     }
+    
     public User getAuthor() {
         return author;
     }
