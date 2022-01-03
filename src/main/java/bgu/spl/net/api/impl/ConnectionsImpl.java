@@ -13,7 +13,11 @@ public class ConnectionsImpl<T> implements Connections<T> {
 
     @Override
     public boolean send(int connectionId, T msg) {
-        connections.get(connectionId).send(msg);
+        ConnectionHandler<T> conn = connections.get(connectionId);
+        if(conn == null)
+            return false;
+        conn.send(msg);
+        return true;
     }
 
     @Override
