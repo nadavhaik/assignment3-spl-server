@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class User {
-    private static AtomicLong nextId = new AtomicLong(0);
+    private static final AtomicLong nextId = new AtomicLong(0);
     private static long allocateNewId() {
         return nextId.getAndIncrement();
     }
