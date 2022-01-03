@@ -10,7 +10,6 @@ public class Post extends AbstractContent {
     public Post(String content, User author) {
         super(author, content, false);
         this.sentTo = new HashMap<>();
-        this.author = author;
         tagUsers();
     }
 
