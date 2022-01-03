@@ -51,7 +51,7 @@ public abstract class AbstractContent extends ObjectWithCreationTime {
     public String getContent() {
         return content;
     }
-    
+
     public User getAuthor() {
         return author;
     }
