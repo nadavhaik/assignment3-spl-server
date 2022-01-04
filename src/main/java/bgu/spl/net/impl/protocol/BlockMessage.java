@@ -27,6 +27,8 @@ public class BlockMessage extends ClientToServerMessage{
 
     @Override
     protected void execute() throws ProtocolException {
+        if(user == null)
+            throw new ProtocolException("User is not logged in!");
         User otherUser = ServerData.getInstance().getUser(username);
         if(otherUser == null)
             throw new ProtocolException("no such user register");

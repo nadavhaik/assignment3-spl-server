@@ -54,7 +54,7 @@ public class PMMessage extends ClientToServerMessage{
         if(sendingTimeAndDate == null)
             throw new ProtocolException("ERROR PARSING SENDING TIME");
         if(!user.sendPM(otherUser,content,sendingTimeAndDate))
-            throw new ProtocolException("CANNOT SEND PM TO OTHERUSER");
+            throw new ProtocolException("CANNOT SEND PM TO OTHER USER");
     }
 
     @Override

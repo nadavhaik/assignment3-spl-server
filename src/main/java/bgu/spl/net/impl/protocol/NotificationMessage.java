@@ -9,7 +9,7 @@ import java.util.List;
 
 public class NotificationMessage extends ResponseMessage {
 
-    private AbstractContent post;
+    private final AbstractContent post;
     public NotificationMessage(AbstractContent post) {
         super(MessagesData.Type.NOTIFICATION, MessagesData.Type.FETCH_NOTIFICATION);
         this.post = post;

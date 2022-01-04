@@ -13,8 +13,8 @@ public class LoginMessage extends ClientToServerMessage{
     private String password;
     private boolean captcha;
 
-    public LoginMessage(ArrayList<Byte> message) {
-        super(MessagesData.Type.LOGIN, message, null); // user will be parsed from message
+    public LoginMessage(ArrayList<Byte> message, User user) {
+        super(MessagesData.Type.LOGIN, message, user); // user will be re-parsed from message later
     }
 
     @Override
@@ -42,9 +42,11 @@ public class LoginMessage extends ClientToServerMessage{
 
     @Override
     public void execute() throws ProtocolException {
+        if(user != null)
+            throw new ProtocolException("Client is already logged in");
         if(!captcha)
             throw new ProtocolException("FAILED CAPTCHA!");
-        User user = ServerData.getInstance().getUser(username);
+        this.user = ServerData.getInstance().getUser(username);
         if(user == null)
             throw new ProtocolException("NO SUCH USER!");
         else if(user.isLoggedIn())

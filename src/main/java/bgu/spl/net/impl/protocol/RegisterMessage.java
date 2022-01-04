@@ -38,7 +38,6 @@ public class RegisterMessage extends ClientToServerMessage{
             bdayBytes.add(message.get(lastIndex));
         }
 
-        // TODO: CHECK IF VALIDATIONS ARE NEEDED
         this.username = BytesEncoderDecoder.decodeString(toArr(usernameBytes));
         this.password = BytesEncoderDecoder.decodeString(toArr(passwordBytes));
         try {

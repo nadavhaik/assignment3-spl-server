@@ -35,7 +35,7 @@ public class EncoderDecoderImpl implements MessageEncoderDecoder<AbstractProtoco
                 message = new RegisterMessage(messageBytes);
                 break;
             case LOGIN:
-                message = new LoginMessage(messageBytes);
+                message = new LoginMessage(messageBytes, user);
                 this.user = ((LoginMessage)message).getUser();
                 break;
             case LOGOUT:
