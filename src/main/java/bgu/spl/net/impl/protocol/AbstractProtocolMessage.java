@@ -9,7 +9,7 @@ public abstract class AbstractProtocolMessage {
         this.type = type;
     }
 
-    protected byte[] toArr(List<Byte> list) {
+    protected static byte[] toArr(List<Byte> list) {
         byte[] arr = new byte[list.size()];
         for(int i=0; i<arr.length;i++) {
             arr[i] = list.get(i);
