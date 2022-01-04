@@ -17,10 +17,10 @@ public abstract class ClientToServerMessage extends AbstractProtocolMessage {
     public abstract void decode(ArrayList<Byte> message);
     protected abstract void execute() throws ProtocolException;
     protected abstract AckMessage ack();
-    private ErrorMessage error() {
+    protected ErrorMessage error() {
         return new ErrorMessage(this.type);
     }
-    final public ResponseMessage actAndRespond() {
+    public ResponseMessage actAndRespond() {
         try {
             execute();
         } catch (ProtocolException e) {

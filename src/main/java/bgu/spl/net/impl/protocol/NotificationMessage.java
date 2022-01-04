@@ -7,11 +7,11 @@ import bgu.spl.net.impl.objects.PrivateMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationMessage extends ServerToClientMessage {
+public class NotificationMessage extends ResponseMessage {
 
     private AbstractContent post;
     public NotificationMessage(AbstractContent post) {
-        super(MessagesData.Type.NOTIFICATION);
+        super(MessagesData.Type.NOTIFICATION, MessagesData.Type.FETCH_NOTIFICATION);
         this.post = post;
     }
 

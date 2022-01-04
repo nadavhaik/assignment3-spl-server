@@ -48,16 +48,20 @@ public class User {
         this.loggedIn = false;
     }
 
-    public Queue<AbstractContent> getUnpushedContent() {
-        return unpushedContent;
+    public AbstractContent getNextNotification() {
+        if(unpushedContent.isEmpty())
+            fetchNewContent();
+        AbstractContent content = unpushedContent.poll();
+        // edge case - was blocked after the content was sent
+        if(content == null || this.hasBlocked(content.getAuthor()) || content.getAuthor().hasBlocked(this))
+            return null;
+        return content;
     }
-
     public long getId() {
         return id;
     }
 
     public void login(){
-        //TODO: Create the thread....
         loggedIn = true;
     }
 
@@ -198,8 +202,8 @@ public class User {
 
     public void block(User other) {
         blocked.put(other, true);
-//        this.unfollow(other);
-//        other.unfollow(this);
+        this.unfollow(other);
+        other.unfollow(this);
     }
 
     public boolean hasBlocked(User other) {

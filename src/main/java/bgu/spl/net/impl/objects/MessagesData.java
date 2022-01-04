@@ -20,7 +20,8 @@ public class MessagesData {
         NOTIFICATION,
         ACK,
         ERROR,
-        BLOCK
+        BLOCK,
+        FETCH_NOTIFICATION
     }
 
     final private Map<Short, Type> opCodes;
@@ -39,22 +40,24 @@ public class MessagesData {
             put((short) 10, Type.ACK);
             put((short) 11, Type.ERROR);
             put((short) 12, Type.BLOCK);
+            put((short) 13, Type.FETCH_NOTIFICATION);
         }};
 
 
         opTypes = new HashMap<Type, Short>() {{
-            put(Type.REGISTER,          (short) 1);
-            put(Type.LOGIN,             (short) 2);
-            put(Type.LOGOUT,            (short) 3);
-            put(Type.FOLLOW_OR_UNFOLLOW,(short) 4);
-            put(Type.POST,              (short) 5);
-            put(Type.PRIVATE_MESSAGE,   (short) 6);
-            put(Type.LOGGEDIN_STATES,   (short) 7);
-            put(Type.STATISTICS,        (short) 8);
-            put(Type.NOTIFICATION,      (short) 9);
-            put(Type.ACK,               (short) 10);
-            put(Type.ERROR,             (short) 11);
-            put(Type.BLOCK,             (short) 12);
+            put(Type.REGISTER,              (short) 1);
+            put(Type.LOGIN,                 (short) 2);
+            put(Type.LOGOUT,                (short) 3);
+            put(Type.FOLLOW_OR_UNFOLLOW,    (short) 4);
+            put(Type.POST,                  (short) 5);
+            put(Type.PRIVATE_MESSAGE,       (short) 6);
+            put(Type.LOGGEDIN_STATES,       (short) 7);
+            put(Type.STATISTICS,            (short) 8);
+            put(Type.NOTIFICATION,          (short) 9);
+            put(Type.ACK,                   (short) 10);
+            put(Type.ERROR,                 (short) 11);
+            put(Type.BLOCK,                 (short) 12);
+            put(Type.FETCH_NOTIFICATION,    (short) 13);
         }};
     }
 

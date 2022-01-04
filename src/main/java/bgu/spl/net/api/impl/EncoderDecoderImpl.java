@@ -60,6 +60,9 @@ public class EncoderDecoderImpl implements MessageEncoderDecoder<AbstractProtoco
             case BLOCK:
                 message = new BlockMessage(messageBytes, user);
                 break;
+            case FETCH_NOTIFICATION:
+                message = new FetchNotificationMessage(messageBytes, user);
+                break;
             default:
                 throw new UnsupportedOperationException("Unsupported Type: " + messageType.name());
         }
