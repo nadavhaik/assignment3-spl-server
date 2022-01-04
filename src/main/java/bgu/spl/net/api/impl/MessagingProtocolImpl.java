@@ -20,9 +20,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<AbstractProtocol
         if(m instanceof LogoutMessage || m instanceof RegisterMessage ||
                 (m instanceof LoginMessage && response instanceof ErrorMessage))
             shouldTerminate = true;
-        else if (m instanceof LoginMessage) {
 
-        }
         return response;
     }
 
