@@ -3,6 +3,7 @@ package bgu.spl.net.impl.protocol;
 import bgu.spl.net.impl.objects.MessagesData;
 
 public class ErrorMessage extends ResponseMessage {
+
     public ErrorMessage(MessagesData.Type originalMessageType) {
         super(originalMessageType, MessagesData.Type.ERROR);
     }

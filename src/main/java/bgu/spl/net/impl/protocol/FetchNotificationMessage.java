@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class FetchNotificationMessage extends ClientToServerMessage{
     private AbstractContent nextNotification;
+
     public FetchNotificationMessage(ArrayList<Byte> message, User user) {
         super(MessagesData.Type.FETCH_NOTIFICATION, message, user);
         this.nextNotification = null;

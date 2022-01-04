@@ -6,7 +6,9 @@ import bgu.spl.net.impl.objects.ServerData;
 import bgu.spl.net.impl.objects.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class StatMessage extends ClientToServerMessage{
     ArrayList<String> userNamesForStatistics;
@@ -19,16 +21,11 @@ public class StatMessage extends ClientToServerMessage{
 
     @Override
     public void decode(ArrayList<Byte> message) {
+        String messageAsString = BytesEncoderDecoder.decodeString(toArr(message));
+        String[] users = messageAsString.split(Pattern.quote("|"));
         int lastIndex = beginIndex;
         List<Byte> usernameBytes = new ArrayList<>();
-        for(lastIndex = beginIndex; message.get(lastIndex) != '\0'; lastIndex++) {
-            if (message.get(lastIndex) != '|')
-                usernameBytes.add(message.get(lastIndex));
-            else {
-                userNamesForStatistics.add(BytesEncoderDecoder.decodeString(toArr(usernameBytes)));
-                usernameBytes = new ArrayList<>();
-            }
-        }
+        userNamesForStatistics.addAll(Arrays.asList(users));
     }
 
     @Override
