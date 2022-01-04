@@ -1,14 +1,11 @@
 package bgu.spl.net.api.impl;
-
 import bgu.spl.net.api.MessagingProtocol;
-import bgu.spl.net.impl.objects.User;
 import bgu.spl.net.impl.protocol.*;
 
 public class MessagingProtocolImpl implements MessagingProtocol<AbstractProtocolMessage> {
     private boolean shouldTerminate;
-    private User user;
+
     public MessagingProtocolImpl() {
-        this.user = null;
         shouldTerminate = false;
     }
     @Override
