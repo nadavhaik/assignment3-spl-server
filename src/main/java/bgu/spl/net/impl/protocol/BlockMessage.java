@@ -34,9 +34,4 @@ public class BlockMessage extends ClientToServerMessage{
             throw new ProtocolException("no such user register");
         user.block(otherUser);
     }
-
-    @Override
-    protected AckMessage ack() {
-        return null;
-    }
 }

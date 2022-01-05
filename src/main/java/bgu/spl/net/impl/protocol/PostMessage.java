@@ -27,9 +27,4 @@ public class PostMessage extends ClientToServerMessage {
             throw new ProtocolException("User is not logged in");
         user.post(content);
     }
-
-    @Override
-    protected AckMessage ack() {
-        return new AckMessage(MessagesData.Type.POST);
-    }
 }

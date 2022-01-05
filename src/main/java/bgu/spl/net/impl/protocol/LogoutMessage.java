@@ -22,10 +22,4 @@ public class LogoutMessage extends ClientToServerMessage{
             throw new ProtocolException("User is not logged in");
         user.logout();
     }
-
-    @Override
-    protected AckMessage ack() {
-        return null;
-    }
-
 }

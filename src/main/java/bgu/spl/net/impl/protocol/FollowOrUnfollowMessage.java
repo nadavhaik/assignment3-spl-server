@@ -50,7 +50,6 @@ public class FollowOrUnfollowMessage extends ClientToServerMessage{
     @Override
     protected AckMessage ack() {
         byte[] followParams = otherUser.getUsername().getBytes(StandardCharsets.UTF_8);
-        AckMessage followAck = new AckMessage(MessagesData.Type.FOLLOW_OR_UNFOLLOW,followParams);
-        return followAck;
+        return new AckMessage(MessagesData.Type.FOLLOW_OR_UNFOLLOW, followParams);
     }
 }

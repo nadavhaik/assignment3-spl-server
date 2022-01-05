@@ -38,9 +38,4 @@ public class FetchNotificationMessage extends ClientToServerMessage{
 
         return new NotificationMessage(nextNotification);
     }
-
-    @Override
-    protected AckMessage ack() {
-        return new AckMessage(MessagesData.Type.FETCH_NOTIFICATION);
-    }
 }

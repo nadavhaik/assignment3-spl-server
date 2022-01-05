@@ -54,9 +54,4 @@ public class RegisterMessage extends ClientToServerMessage{
         if(!ServerData.getInstance().register(username, password, birthday))
             throw new ProtocolException("Registration failed");
     }
-
-    @Override
-    protected AckMessage ack() {
-        return new AckMessage(MessagesData.Type.REGISTER);
-    }
 }

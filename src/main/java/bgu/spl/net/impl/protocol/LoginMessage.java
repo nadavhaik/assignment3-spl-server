@@ -56,9 +56,4 @@ public class LoginMessage extends ClientToServerMessage{
 
         user.login();
     }
-
-    @Override
-    protected AckMessage ack() {
-        return new AckMessage(MessagesData.Type.LOGIN);
-    }
 }

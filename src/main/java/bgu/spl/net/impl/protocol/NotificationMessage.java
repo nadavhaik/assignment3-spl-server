@@ -35,6 +35,5 @@ public class NotificationMessage extends ResponseMessage {
         bytes.add((byte)';');
 
         return toArr(bytes);
-
     }
 }

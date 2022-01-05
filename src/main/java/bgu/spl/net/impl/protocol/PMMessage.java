@@ -56,9 +56,4 @@ public class PMMessage extends ClientToServerMessage{
         if(!user.sendPM(otherUser,content,sendingTimeAndDate))
             throw new ProtocolException("CANNOT SEND PM TO OTHER USER");
     }
-
-    @Override
-    protected AckMessage ack() { // no ack for this method ?
-        return null;
-    }
 }
