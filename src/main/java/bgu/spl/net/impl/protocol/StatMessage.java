@@ -16,11 +16,11 @@ public class StatMessage extends ClientToServerMessage{
 
     public StatMessage(ArrayList<Byte> message, User user) {
         super(MessagesData.Type.STATISTICS, message, user);
-        userNamesForStatistics = new ArrayList<>();
     }
 
     @Override
     public void decode(ArrayList<Byte> message) {
+        userNamesForStatistics = new ArrayList<>();
         String messageAsString = BytesEncoderDecoder.decodeString(toArr(message));
         String[] users = messageAsString.split(Pattern.quote("|"));
         int lastIndex = beginIndex;
