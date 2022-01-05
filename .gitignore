@@ -8,3 +8,4 @@
 .idea/uiDesigner.xml
 *.class
 .idea/jarRepositories.xml
+.idea/remote-targets.xml

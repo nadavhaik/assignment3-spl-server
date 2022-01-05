@@ -21,6 +21,9 @@ public class StatMessage extends ClientToServerMessage{
     @Override
     public void decode(ArrayList<Byte> message) {
         userNamesForStatistics = new ArrayList<>();
+        message.remove(0);
+        message.remove(0);
+        message.remove(message.size()-1);
         String messageAsString = BytesEncoderDecoder.decodeString(toArr(message));
         String[] users = messageAsString.split(Pattern.quote("|"));
         int lastIndex = beginIndex;
@@ -32,6 +35,7 @@ public class StatMessage extends ClientToServerMessage{
     protected void execute() throws ProtocolException {
         if(user == null)
             throw new ProtocolException("User is not logged in");
+        usersForStatistics = new ArrayList<>();
         for (String userName : userNamesForStatistics){
             User otherUser = ServerData.getInstance().getUser(userName);
             if(otherUser != null && !user.hasBlocked(otherUser) && !otherUser.hasBlocked(user))
