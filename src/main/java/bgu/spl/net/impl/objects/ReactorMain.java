@@ -10,8 +10,8 @@ import java.net.UnknownHostException;
 
 public class ReactorMain {
     public static void main(String[] args) throws UnknownHostException {
-        int port = 9400;//Integer.parseInt(args[0]);
-        int numOfThreads = 1;//Integer.parseInt(args[1]);
+        int port = Integer.parseInt(args[0]);
+        int numOfThreads = Integer.parseInt(args[1]);
         InetAddress localhost = InetAddress.getLocalHost();
         System.out.println("SYSTEM IP: " + localhost.getHostAddress());
         Server.reactor(numOfThreads, port, MessagingProtocolImpl::new,
