@@ -2,7 +2,7 @@ package bgu.spl.net.impl.protocol;
 import bgu.spl.net.impl.objects.MessagesData;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AckMessage extends ResponseMessage {
@@ -22,29 +22,23 @@ public class AckMessage extends ResponseMessage {
 
     public AckMessage(MessagesData.Type originalMessageType) {
         super(MessagesData.Type.ACK, originalMessageType);
-        this.params = new LinkedList<>();
+        this.params = null;
     }
 
     @Override
-    public byte[] encode() {
-        byte[] response = new byte[4 + params.size() + 1]; // OP + MESSAGE OP + PARAMS + ';'
+    protected List<Byte> encodeToList() {
         byte[] opCode = BytesEncoderDecoder.encodeShort(MessagesData.getInstance()
                 .getOP(MessagesData.Type.ACK));
         byte[] messageOpCode = BytesEncoderDecoder.encodeShort(MessagesData.getInstance()
                 .getOP(originalMessageType));
-        response[0] = opCode[0];
-        response[1] = opCode[1];
-        response[2] = messageOpCode[0];
-        response[3] = messageOpCode[1];
-        int i = 4;
-        for(Byte b : params) {
-            response[i] = b;
-            i++;
-        }
-        response[response.length-1] = ';';
 
+
+        List<Byte> response = new ArrayList<>(Arrays.asList(opCode[0], opCode[1], messageOpCode[0], messageOpCode[1]));
+        // Arrays.asList returns an abstract list that doesn't support adding -
+        // we must convert it to ArrayList before adding params.
+
+        if(params != null)
+            response.addAll(params);
         return response;
-
     }
-
 }

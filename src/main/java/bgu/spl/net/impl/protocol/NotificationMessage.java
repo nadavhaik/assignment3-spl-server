@@ -16,24 +16,22 @@ public class NotificationMessage extends ResponseMessage {
     }
 
     @Override
-    public byte[] encode() {
-        List<Byte> bytes = new ArrayList<>();
+    protected List<Byte> encodeToList() {
+        List<Byte> response = new ArrayList<>();
         byte[] opCode = BytesEncoderDecoder.encodeShort(MessagesData.getInstance().
                 getOP(MessagesData.Type.NOTIFICATION));
-
         byte notificationType = (post instanceof PrivateMessage) ? (byte) 0 : (byte) 1;
         List<Byte> postingUser = BytesEncoderDecoder.encodeStringToList(post.getAuthor().getUsername());
         List<Byte> content = BytesEncoderDecoder.encodeStringToList(post.getContent());
 
-        bytes.add(opCode[0]);
-        bytes.add(opCode[1]);
-        bytes.add(notificationType);
-        bytes.addAll(postingUser);
-        bytes.add((byte)'\0');
-        bytes.addAll(content);
-        bytes.add((byte)'\0');
-        bytes.add((byte)';');
+        response.add(opCode[0]);
+        response.add(opCode[1]);
+        response.add(notificationType);
+        response.addAll(postingUser);
+        response.add((byte)'\0');
+        response.addAll(content);
+        response.add((byte)'\0');
 
-        return toArr(bytes);
+        return response;
     }
 }
