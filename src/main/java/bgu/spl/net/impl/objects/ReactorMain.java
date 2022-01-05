@@ -10,6 +10,10 @@ import java.net.UnknownHostException;
 
 public class ReactorMain {
     public static void main(String[] args) throws UnknownHostException {
+        if(args.length < 2) {
+            System.out.println("Usage: port, threads");
+            return;
+        }
         int port = Integer.parseInt(args[0]);
         int numOfThreads = Integer.parseInt(args[1]);
         InetAddress localhost = InetAddress.getLocalHost();
