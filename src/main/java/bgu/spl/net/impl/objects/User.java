@@ -75,7 +75,7 @@ public class User {
     }
 
     public boolean sendPM(User to, String content, Date sendDateTime) {
-        if(ServerData.getInstance().getUser(to.getUsername()) == null)
+        if(to == null)
             return false;
         if(!following.contains(to))
             return false;
@@ -137,9 +137,9 @@ public class User {
     public List<PrivateMessage> fetchPrivateMessages(long fromTime, long toTime) {
         List<PrivateMessage> relevantMessages = new LinkedList<>();
         for (PrivateMessage pm : inbox) {
-            if (fromTime < pm.getCreationTime())
+            if (pm.getCreationTime() < fromTime)
                 break;
-            if(pm.getCreationTime() < toTime)
+            if(pm.getCreationTime() <= toTime)
                 relevantMessages.add(pm);
         }
 

@@ -46,14 +46,16 @@ public class LoginMessage extends ClientToServerMessage{
             throw new ProtocolException("Client is already logged in");
         if(!captcha)
             throw new ProtocolException("FAILED CAPTCHA!");
-        this.user = ServerData.getInstance().getUser(username);
+
+        User user = ServerData.getInstance().getUser(username);
         if(user == null)
             throw new ProtocolException("NO SUCH USER!");
         else if(user.isLoggedIn())
             throw new ProtocolException("USER IS ALREADY LOGGED IN!");
         else if(!user.getPassword().equals(password))
             throw new ProtocolException("INVALID PASSWORD!");
-
         user.login();
+        this.user = user;
+
     }
 }

@@ -21,7 +21,7 @@ public class FollowOrUnfollowMessage extends ClientToServerMessage{
         int lastIndex = beginIndex;
         this.follow = message.get(lastIndex) == 0;
         List<Byte> usernameBytes = new ArrayList<>();
-        for(lastIndex++; lastIndex < message.size(); lastIndex++) {
+        for(lastIndex++; lastIndex < message.size()-1; lastIndex++) { // excluding the '\0' in the end
             usernameBytes.add(message.get(lastIndex));
         }
         this.otherUser = ServerData.getInstance().
@@ -32,19 +32,16 @@ public class FollowOrUnfollowMessage extends ClientToServerMessage{
     protected void execute() throws ProtocolException {
         if(user == null)
             throw new ProtocolException("User is not logged in");
-        boolean unFollow = !follow;
         if(otherUser == null)
             throw new ProtocolException("OTHER USER IS NULL");
         if(!user.isLoggedIn())
             throw new ProtocolException("USER IS NOT LOGGEDIN");
         if (follow) {
-            if(user.follow(otherUser))
+            if(!user.follow(otherUser))
                 throw new ProtocolException("CAN NOT EXECUTE FOLLOW");
-        }
-        if (unFollow) {
-            if (user.unfollow(otherUser))
+        } else if (!user.unfollow(otherUser))
                 throw new ProtocolException("CAN NOT EXECUTE UNFOLLOW");
-        }
+
     }
 
     @Override

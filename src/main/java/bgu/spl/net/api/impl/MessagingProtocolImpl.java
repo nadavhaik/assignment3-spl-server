@@ -14,8 +14,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<AbstractProtocol
             throw new UnsupportedOperationException();
         ClientToServerMessage m = (ClientToServerMessage) msg;
         ResponseMessage response = m.actAndRespond();
-        if(m instanceof LogoutMessage || m instanceof RegisterMessage ||
-                (m instanceof LoginMessage && response instanceof ErrorMessage))
+        if(m instanceof LogoutMessage && response instanceof AckMessage)
             shouldTerminate = true;
 
         return response;
