@@ -7,7 +7,7 @@ import java.util.List;
 public class ErrorMessage extends ResponseMessage {
 
     public ErrorMessage(MessagesData.Type originalMessageType) {
-        super(originalMessageType, MessagesData.Type.ERROR);
+        super(MessagesData.Type.ERROR, originalMessageType);
     }
 
     @Override
