@@ -125,9 +125,9 @@ public class User {
     public List<Post> fetchPosts(long fromTime, long toTime) {
         List<Post> relevantPosts = new LinkedList<>();
         for (Post post : posts) {
-            if (fromTime < post.getCreationTime())
+            if (post.getCreationTime() < fromTime)
                 break;
-            if(post.getCreationTime() < toTime)
+            if(post.getCreationTime() <= toTime)
                 relevantPosts.add(post);
         }
 
