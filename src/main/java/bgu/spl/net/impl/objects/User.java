@@ -81,7 +81,7 @@ public class User {
             return false;
         if(this.hasBlocked(to) || to.hasBlocked(this))
             return false;
-        to.addToInbox(new PrivateMessage(content, this, to, sendDateTime));
+        to.addToInbox(new PrivateMessage(content, this, sendDateTime));
         return true;
     }
 
