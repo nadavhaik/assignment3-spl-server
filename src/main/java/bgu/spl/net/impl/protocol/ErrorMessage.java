@@ -1,8 +1,6 @@
 package bgu.spl.net.impl.protocol;
 
 import bgu.spl.net.impl.objects.MessagesData;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

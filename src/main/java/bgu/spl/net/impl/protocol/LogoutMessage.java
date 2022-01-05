@@ -3,9 +3,7 @@ package bgu.spl.net.impl.protocol;
 import bgu.spl.net.impl.ProtocolException;
 import bgu.spl.net.impl.objects.MessagesData;
 import bgu.spl.net.impl.objects.User;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class LogoutMessage extends ClientToServerMessage{
 

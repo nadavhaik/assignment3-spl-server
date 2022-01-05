@@ -18,7 +18,7 @@ public class RegisterMessage extends ClientToServerMessage{
     private Date birthday;
 
     public RegisterMessage(ArrayList<Byte> message) {
-        super(MessagesData.Type.REGISTER, message, null); //
+        super(MessagesData.Type.REGISTER, message, null);
         this.type = MessagesData.Type.REGISTER;
     }
 
