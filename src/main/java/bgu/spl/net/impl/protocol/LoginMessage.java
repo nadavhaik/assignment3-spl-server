@@ -55,7 +55,6 @@ public class LoginMessage extends ClientToServerMessage{
             throw new ProtocolException("INVALID PASSWORD!");
 
         user.login();
-
     }
 
     @Override
