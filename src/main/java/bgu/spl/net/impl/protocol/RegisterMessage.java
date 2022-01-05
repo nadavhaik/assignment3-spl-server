@@ -19,7 +19,6 @@ public class RegisterMessage extends ClientToServerMessage{
 
     public RegisterMessage(ArrayList<Byte> message) {
         super(MessagesData.Type.REGISTER, message, null);
-        this.type = MessagesData.Type.REGISTER;
     }
 
     @Override
