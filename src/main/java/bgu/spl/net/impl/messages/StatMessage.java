@@ -41,6 +41,8 @@ public class StatMessage extends ClientToServerMessage{
             User otherUser = ServerData.getInstance().getUser(userName);
             if(otherUser != null && !user.hasBlocked(otherUser) && !otherUser.hasBlocked(user))
                 usersForStatistics.add(otherUser);
+            else
+                throw new ProtocolException("Cannot fetch data for one user or more");
         }
     }
 
