@@ -27,8 +27,6 @@ public class StatMessage extends ClientToServerMessage{
         message.remove(message.size()-1);
         String messageAsString = BytesEncoderDecoder.decodeString(toArr(message));
         String[] users = messageAsString.split(Pattern.quote("|"));
-        int lastIndex = beginIndex;
-        List<Byte> usernameBytes = new ArrayList<>();
         userNamesForStatistics.addAll(Arrays.asList(users));
     }
 
