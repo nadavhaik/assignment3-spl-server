@@ -6,7 +6,7 @@ import bgu.spl.net.srv.Server;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class TCPMain {
+public class TPCMain {
     public static void main(String[] args) throws UnknownHostException {
         if(args.length == 0) {
             System.out.println("Usage: port");
