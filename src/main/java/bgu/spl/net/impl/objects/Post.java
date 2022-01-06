@@ -31,10 +31,10 @@ public class Post extends AbstractContent {
             start != -1 && end != -1;
             start = content.indexOf('@', end), end = content.indexOf(' ', start)) {
 
-            potentialUsernames.add(content.substring(start, end));
+            potentialUsernames.add(content.substring(start+1, end));
         }
         if(start != -1) // content ends with a tag, something like: "blah blah blah...@<username>"
-            potentialUsernames.add(content.substring(start, content.length()-1));
+            potentialUsernames.add(content.substring(start+1, content.length()-1));
 
         for(String username : potentialUsernames) {
             User user = ServerData.getInstance().getUser(username);
