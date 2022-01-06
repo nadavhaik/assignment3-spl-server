@@ -1,9 +1,10 @@
 package bgu.spl.net.api.impl;
 
 import bgu.spl.net.api.MessageEncoderDecoder;
+import bgu.spl.net.impl.BytesEncoderDecoder;
 import bgu.spl.net.impl.objects.MessagesData;
 import bgu.spl.net.impl.objects.User;
-import bgu.spl.net.impl.protocol.*;
+import bgu.spl.net.impl.messages.*;
 import java.util.ArrayList;
 
 public class EncoderDecoderImpl implements MessageEncoderDecoder<AbstractProtocolMessage> {

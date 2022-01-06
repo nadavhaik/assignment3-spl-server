@@ -1,6 +1,6 @@
 package bgu.spl.net.api.impl;
 import bgu.spl.net.api.MessagingProtocol;
-import bgu.spl.net.impl.protocol.*;
+import bgu.spl.net.impl.messages.*;
 
 public class MessagingProtocolImpl implements MessagingProtocol<AbstractProtocolMessage> {
     private boolean shouldTerminate;

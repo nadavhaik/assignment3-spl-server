@@ -1,5 +1,6 @@
-package bgu.spl.net.impl.protocol;
+package bgu.spl.net.impl.messages;
 
+import bgu.spl.net.impl.BytesEncoderDecoder;
 import bgu.spl.net.impl.objects.MessagesData;
 import java.util.Arrays;
 import java.util.List;

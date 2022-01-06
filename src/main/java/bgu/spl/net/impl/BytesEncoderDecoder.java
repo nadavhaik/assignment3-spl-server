@@ -1,4 +1,4 @@
-package bgu.spl.net.impl.protocol;
+package bgu.spl.net.impl;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
