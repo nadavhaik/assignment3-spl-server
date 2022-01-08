@@ -34,7 +34,7 @@ public class EncoderDecoderImpl implements MessageEncoderDecoder<AbstractProtoco
                 break;
             case LOGIN:
                 message = new LoginMessage(messageBytes, user);
-                this.user = ((LoginMessage)message).getUser();
+                this.user = ((LoginMessage)message).getUser(); // happens before execute - returns null if error is expected to happen
                 break;
             case LOGOUT:
                 message = new LogoutMessage(messageBytes, user);
