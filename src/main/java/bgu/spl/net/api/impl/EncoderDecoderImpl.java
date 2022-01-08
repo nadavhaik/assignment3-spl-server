@@ -66,7 +66,7 @@ public class EncoderDecoderImpl implements MessageEncoderDecoder<AbstractProtoco
         }
         return message;
 
-        }
+    }
 
     @Override
     public AbstractProtocolMessage decodeNextByte(byte nextByte) {

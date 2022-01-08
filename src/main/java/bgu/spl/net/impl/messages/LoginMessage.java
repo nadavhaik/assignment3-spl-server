@@ -36,7 +36,7 @@ public class LoginMessage extends ClientToServerMessage{
 
     public User getUser() {
         User user = ServerData.getInstance().getUser(username);
-        if(user == null || user.isLoggedIn() || !user.getPassword().equals(password))
+        if(user == null || user.isLoggedIn() || !user.getPassword().equals(password) || !captcha)
             return null;
         return user;
     }
