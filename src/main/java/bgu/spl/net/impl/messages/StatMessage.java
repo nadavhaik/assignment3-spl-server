@@ -63,6 +63,6 @@ public class StatMessage extends ClientToServerMessage{
             params.add(numOfFollowing[1]);
         }
 
-        return new AckMessage(MessagesData.Type.LOGGEDIN_STATES, params);
+        return new AckMessage(MessagesData.Type.STATISTICS, params);
     }
 }
