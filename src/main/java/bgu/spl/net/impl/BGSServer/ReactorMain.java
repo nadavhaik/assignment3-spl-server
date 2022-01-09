@@ -5,10 +5,14 @@ import bgu.spl.net.api.impl.MessagingProtocolImpl;
 import bgu.spl.net.srv.Server;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.regex.Pattern;
 
 public class ReactorMain {
     public static void main(String[] args) throws UnknownHostException {
-        if(args.length < 2) {
+        if(args.length == 1) {
+            args = args[0].split(Pattern.quote(","));
+        }
+        if(args.length != 2) {
             System.out.println("Usage: port, threads");
             return;
         }
